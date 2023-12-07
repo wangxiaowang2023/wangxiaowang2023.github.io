@@ -16,25 +16,25 @@
   <meta name="author" content="Wangxiaowang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="11.1 json序列化Go语言中的序列化和反序列化是一种解码思路 可以将结构体进行序列化为JSON字符串格式， 注意：不是将类型转化为JSON，go语言没有JSON格式类型， 是将数据，转化为 JSON格式风格的数据，供其他语言使用， 比如说，python中，也没有json这种数据格式，把一串json导入到Python，打印它的类型，打印出来就是string字符串类型，将json转化成字典，就是">
+    <meta name="description" content="接口interface关于接口的概念 接口interface是定义了一组方法的集合，  接口提供了一种标准化的方式，用来规定对象的行为，。  通过接口，你定义了对象必须具备的方法。而不必关心对象的具体实现。这种抽象的方式，可以更加灵活和复用  通过定义接口interface，然后让对象来调用或者实现  接口interface可以作为函数的入参参数，也可以作为返回值 实现多态  接口Interfac">
 <meta property="og:type" content="article">
-<meta property="og:title" content="go语言json序列化和反序列化">
-<meta property="og:url" content="http://example.com/2023/12/06/11.1%20go%E8%AF%AD%E8%A8%80json%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/index.html">
+<meta property="og:title" content="go语言之接口(interface)">
+<meta property="og:url" content="http://example.com/2023/12/06/go%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%8E%A5%E5%8F%A3(interface)/index.html">
 <meta property="og:site_name" content="Wang">
-<meta property="og:description" content="11.1 json序列化Go语言中的序列化和反序列化是一种解码思路 可以将结构体进行序列化为JSON字符串格式， 注意：不是将类型转化为JSON，go语言没有JSON格式类型， 是将数据，转化为 JSON格式风格的数据，供其他语言使用， 比如说，python中，也没有json这种数据格式，把一串json导入到Python，打印它的类型，打印出来就是string字符串类型，将json转化成字典，就是">
+<meta property="og:description" content="接口interface关于接口的概念 接口interface是定义了一组方法的集合，  接口提供了一种标准化的方式，用来规定对象的行为，。  通过接口，你定义了对象必须具备的方法。而不必关心对象的具体实现。这种抽象的方式，可以更加灵活和复用  通过定义接口interface，然后让对象来调用或者实现  接口interface可以作为函数的入参参数，也可以作为返回值 实现多态  接口Interfac">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/55.jpg">
-<meta property="article:published_time" content="2023-12-06T03:43:56.000Z">
-<meta property="article:modified_time" content="2023-12-07T07:32:50.334Z">
+<meta property="og:image" content="http://example.com/img/11.jpg">
+<meta property="article:published_time" content="2023-12-06T11:18:48.000Z">
+<meta property="article:modified_time" content="2023-12-07T07:41:48.360Z">
 <meta property="article:author" content="Wangxiaowang">
 <meta property="article:tag" content="go">
 <meta property="article:tag" content="编程">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/55.jpg">
+<meta name="twitter:image" content="http://example.com/img/11.jpg">
   
   
   
-  <title>go语言json序列化和反序列化 - Wang</title>
+  <title>go语言之接口(interface) - Wang</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -194,13 +194,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/55.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/11.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="go语言json序列化和反序列化"></span>
+            <span id="subtitle" data-typed-text="go语言之接口(interface)"></span>
           
         </div>
 
@@ -211,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-12-06 11:43" pubdate>
-          2023年12月6日 中午
+        <time datetime="2023-12-06 19:18" pubdate>
+          2023年12月6日 晚上
         </time>
       </span>
     
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.4k 字
+          2.2k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          29 分钟
+          18 分钟
         
       </span>
     
@@ -271,33 +271,49 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">go语言json序列化和反序列化</h1>
+            <h1 id="seo-header">go语言之接口(interface)</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="11-1-json序列化"><a href="#11-1-json序列化" class="headerlink" title="11.1 json序列化"></a>11.1 json序列化</h1><p>Go语言中的序列化和反序列化是一种解码<strong>思路</strong></p>
-<p>可以将结构体进行序列化为<strong>JSON字符串格式</strong>，</p>
-<p><code>注意：不是将类型转化为JSON，go语言没有JSON格式类型，</code></p>
-<p>是将数据，转化为 JSON格式风格的数据，供其他语言使用，</p>
-<p>比如说，python中，也没有json这种数据格式，把一串json导入到Python，打印它的类型，打印出来就是string字符串类型，将json转化成字典，就是将字符串转成字典</p>
-<p>带入到go语言中也是一样的概念，只是go语言可以通过结构体去转化成json(序列化)，变成一种键值对的格式（也有不是键值对格式的json）</p>
-<p>go语言序列化（结构体转json）和反序列化的实现方式：通过json.Marshal(person) person就是结构体实例化的数据，json.Unmarshal(jsondata)就是反序列化（结构体转json）</p>
-<p>结构体转JSON</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;encoding/json&quot;</span><br>	<span class="hljs-string">&quot;fmt&quot;</span><br>)<br><br><span class="hljs-keyword">type</span> Myaccount <span class="hljs-keyword">struct</span> &#123;<br>	Name   <span class="hljs-type">string</span> <span class="hljs-string">`json:&quot;name&quot;`</span><br>	PWD    <span class="hljs-type">string</span> <span class="hljs-string">`json:&quot;pwd&quot;`</span><br>	Amount <span class="hljs-type">int</span>    <span class="hljs-string">`json:&quot;amount&quot;`</span><br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	account := Myaccount&#123;<span class="hljs-string">&quot;and&quot;</span>, <span class="hljs-string">&quot;123&quot;</span>, <span class="hljs-number">18</span>&#125;<br>	fmt.Println(<span class="hljs-string">&quot;打印一下：&quot;</span>, account) <span class="hljs-comment">// 打印一下： &#123;and 123 18&#125;</span><br>	<span class="hljs-comment">// 序列化方法</span><br>	data1, _ := json.Marshal(account)<br>    fmt.Println(<span class="hljs-string">&quot;序列化后的data1:&quot;</span>, <span class="hljs-type">string</span>(data1)) <span class="hljs-comment">// 序列化后的data1: &#123;&quot;name&quot;:&quot;and&quot;,&quot;pwd&quot;:&quot;123&quot;,&quot;amount&quot;:18&#125;</span><br>	fmt.Printf(<span class="hljs-string">&quot;%T\n&quot;</span>, data1) <span class="hljs-comment">// 打印出来的类型是无符号8位整形[]uint8，无正负符号8位整形</span><br>	data2, _ := json.MarshalIndent(account, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-string">&quot; &quot;</span>)<span class="hljs-comment">// MarshalIndent带缩进</span><br><br>	fmt.Println(<span class="hljs-string">&quot;序列化后的data2=&quot;</span>, <span class="hljs-type">string</span>(data2))    <span class="hljs-comment">// 序列化后的data2= &#123;</span><br> <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;and&quot;</span>,<br> <span class="hljs-string">&quot;pwd&quot;</span>: <span class="hljs-string">&quot;123&quot;</span>,<br> <span class="hljs-string">&quot;amount&quot;</span>: <span class="hljs-number">18</span><br>&#125;<br>	fmt.Printf(<span class="hljs-string">&quot;data2的格式是：%T\n&quot;</span>, data2) <span class="hljs-comment">// []uint8</span><br><span class="hljs-comment">// 反序列化方法，就用json.Unmarshal()方法</span><br>	<span class="hljs-keyword">var</span> account2 Myaccount <span class="hljs-comment">// 定义一个变量account2，类型是Myaccount结构体</span><br>	json.Ummarshal(data1,&amp;account2)<br>	fmt.Println(<span class="hljs-string">&quot;account2=&quot;</span>, account2)<span class="hljs-comment">// account2=&#123;and 123 18&#125; ,打印出来的就是结构体了</span><br>	fmt.Printf(<span class="hljs-string">&quot;%T\n&quot;</span>, account2) <span class="hljs-comment">// 类型就是main.Myaccount</span><br><br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// 再写一个</span><br><span class="hljs-keyword">type</span> MyScore <span class="hljs-keyword">struct</span> &#123;<br>	Name  <span class="hljs-type">string</span> <span class="hljs-string">`json:&quot;name&quot;`</span><br>	Class <span class="hljs-type">string</span> <span class="hljs-string">`json:&quot;class&quot;`</span><br>	Score <span class="hljs-type">int</span>    <span class="hljs-string">`json:&quot;score&quot;`</span><br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    TomScore := MyScore&#123;<span class="hljs-string">&quot;Tom&quot;</span>, <span class="hljs-string">&quot;2班&quot;</span>, <span class="hljs-number">99</span>&#125;<br>	fmt.Println(<span class="hljs-string">&quot;TomSocre=&quot;</span>, TomScore)<br>	<span class="hljs-comment">// 将TomScore进行序列化</span><br>	JsonTomScore, _ := json.Marshal(TomScore)<br>	fmt.Println(<span class="hljs-string">&quot;JsonTomScore=&quot;</span>, <span class="hljs-type">string</span>(JsonTomScore))<br>	<span class="hljs-comment">// 优化缩进后的</span><br>	JsonTomScore2, _ := json.MarshalIndent(TomScore, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-string">&quot; &quot;</span>)<br>	fmt.Println(<span class="hljs-string">&quot;JsonTomScore2=&quot;</span>, <span class="hljs-type">string</span>(JsonTomScore2))<br>	<span class="hljs-comment">// 反序列化</span><br>	<span class="hljs-keyword">var</span> tom MyScore<br>	json.Unmarshal(JsonTomScore, &amp;tom)<br>	fmt.Println(<span class="hljs-string">&quot;tom=&quot;</span>, tom)<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<blockquote>
-<p>序列化和反序列化，目前用到的是结构体类型数据转成json格式，和json格式转成结构体类型的数据</p>
-</blockquote>
-<h1 id="Yaml-序列化和反序列化（yaml与结构体互转）"><a href="#Yaml-序列化和反序列化（yaml与结构体互转）" class="headerlink" title="Yaml 序列化和反序列化（yaml与结构体互转）"></a>Yaml 序列化和反序列化（yaml与结构体互转）</h1><ul>
-<li>思路和方式跟json的是一样的，只是用了一个库：**”gopkg.in&#x2F;yaml.v3”**</li>
+                <h1 id="接口interface"><a href="#接口interface" class="headerlink" title="接口interface"></a>接口interface</h1><h2 id="关于接口的概念"><a href="#关于接口的概念" class="headerlink" title="关于接口的概念"></a>关于接口的概念</h2><ul>
+<li><p>接口interface是定义了一组方法的集合，</p>
+</li>
+<li><p>接口提供了一种标准化的方式，用来规定对象的行为，。</p>
+</li>
+<li><p>通过接口，你定义了对象必须具备的方法。而不必关心对象的具体实现。这种抽象的方式，可以更加灵活和复用</p>
+</li>
+<li><p>通过定义接口interface，然后让对象来调用或者实现</p>
+</li>
+<li><p>接口interface可以作为函数的入参参数，也可以作为返回值 实现多态</p>
+</li>
+<li><p>接口Interface 是一种规范，是一种限制，</p>
+</li>
 </ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;gopkg.in/yaml.v3&quot;</span><br>	<span class="hljs-string">&quot;io/ioutil&quot;</span><br>	<span class="hljs-string">&quot;log&quot;</span><br>)<br><br><span class="hljs-keyword">type</span> MyYAML <span class="hljs-keyword">struct</span> &#123;<br>	Name  <span class="hljs-type">string</span> <span class="hljs-string">`yaml:&quot;name&quot;`</span><br>	Age   <span class="hljs-type">int</span>    <span class="hljs-string">`yaml:&quot;age&quot;`</span><br>	Email <span class="hljs-type">string</span> <span class="hljs-string">`yaml:&quot;email,omitempty&quot;`</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-comment">// 序列化yaml 和序列化json一样的  yaml.Marshal</span><br>	YamlStruct := MyYAML&#123;<span class="hljs-string">&quot;andy&quot;</span>, <span class="hljs-number">11</span>, <span class="hljs-string">&quot;110@163.com&quot;</span>&#125;<br>	fmt.Println(<span class="hljs-string">&quot;YamlStruct=&quot;</span>, YamlStruct)<br>	YamlDate, _ := yaml.Marshal(YamlStruct)<br>	fmt.Println(<span class="hljs-string">&quot;YamlDate=&quot;</span>, <span class="hljs-type">string</span>(YamlDate))<br>	<span class="hljs-comment">// 下面反序列化yaml,也是和json一样思路，yaml.UnMarshal</span><br>	<span class="hljs-comment">// 不过在这之前你要有一个yaml文件，读取这个yaml文件后才能去打印出来</span><br>	yamlDataFile, err := ioutil.ReadFile(<span class="hljs-string">&quot;data.yml&quot;</span>) <span class="hljs-comment">// 读取yml文件</span><br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Fatalf(<span class="hljs-string">&quot;Failed to read YAML file: %v&quot;</span>, err)<br>	&#125;<br>	<span class="hljs-keyword">var</span> MyYamlStruct MyYAML<br>	err = yaml.Unmarshal(yamlDataFile, &amp;MyYamlStruct) <span class="hljs-comment">// 把数据赋值到结构体里，用指针，改变他的值</span><br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Fatalf(<span class="hljs-string">&quot;Failed to unmarshal YAML: %v&quot;</span>, err)<br>	&#125;<br>	<span class="hljs-comment">// 打印数据出来，</span><br>	fmt.Printf(<span class="hljs-string">&quot;Name: %s, Age: %d, Email: %s\n&quot;</span>, MyYamlStruct.Name, MyYamlStruct.Age, MyYamlStruct.Email)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p> <strong>当你把接口interface定义好后，作为入参，那你这个函数的入参，就必须有你定义的接口interface有的方法，不然就会报错，</strong></p>
+<ul>
+<li><p>同理你把interface类型的东西作为return出去的东西，那你就在定义return的对象时就必须定义他有哪些方法，</p>
+</li>
+<li><p>总的说，接口等同于python的基类，基类用于子类必须实现方法，接口也是子类必须实现方法。</p>
+</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-keyword">type</span> animal <span class="hljs-keyword">interface</span> &#123; <span class="hljs-comment">//在定义接口interface类型，这个类型有一个say方法</span><br>	say()<br>&#125;<br><span class="hljs-keyword">type</span> cat <span class="hljs-keyword">struct</span> &#123; <span class="hljs-comment">// 结构体</span><br>	Name <span class="hljs-type">string</span><br>&#125;<br><span class="hljs-keyword">type</span> dog <span class="hljs-keyword">struct</span> &#123; <span class="hljs-comment">// 结构体</span><br>	Name <span class="hljs-type">string</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c cat)</span></span> say() &#123; <span class="hljs-comment">// 这个是方法，结构体的方法</span><br>	fmt.Printf(<span class="hljs-string">&quot;%v小花猫，喵喵叫\n&quot;</span>, c.Name)<br>&#125;<br><br><span class="hljs-comment">// 这两个结构体都有say方法</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(d dog)</span></span> say() &#123; <span class="hljs-comment">// 这个say也是方法，结构体的方法</span><br>	fmt.Printf(<span class="hljs-string">&quot;%v小土狗，汪汪叫\n&quot;</span>, d.Name)<br><br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">aaa</span><span class="hljs-params">(a animal)</span></span> <span class="hljs-type">string</span> &#123; <span class="hljs-comment">//这个方法的入参是一个animal接口类，所以传进来的参数必须要是animal类型，必须要有say方法</span><br>	a.say()<br>	<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;aaa&quot;</span><br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">bbb</span><span class="hljs-params">(s <span class="hljs-type">string</span>)</span></span> animal &#123; <span class="hljs-comment">// 这是在定义一个返回值为interface接口类型的函数</span><br>	<span class="hljs-comment">//a.say()</span><br>	<span class="hljs-comment">//a.say()</span><br>	c := cat&#123;<span class="hljs-string">&quot;小白&quot;</span>&#125;<br>	<span class="hljs-keyword">return</span> c<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	c := cat&#123;<span class="hljs-string">&quot;小白&quot;</span>&#125;    <span class="hljs-comment">//这个C是cat结构体的实例化对象</span><br>	d := aaa(c)       <span class="hljs-comment">//这个d是函数aaa的实例化对象 需要传入参，入参就是C 且这个入参必须要有say方法，不然就会报错</span><br>	fmt.Printf(d)     <span class="hljs-comment">//打印这个d，此时d是有返回值string的所以可以打印出来</span><br>	e := bbb(<span class="hljs-string">&quot;hello&quot;</span>) <span class="hljs-comment">//这是在实例化bbb函数，e就是上面的c，是一个interface接口类型的。</span><br>	e.say()           <span class="hljs-comment">// e是不可以直接打印的，因为你无法打印接口类型。但是你可以调用这个interface接口的方法</span><br><br>&#125;<br><br></code></pre></td></tr></table></figure>
 
+<h1 id="接口也是一种类型，可以定义变量"><a href="#接口也是一种类型，可以定义变量" class="headerlink" title="接口也是一种类型，可以定义变量"></a>接口也是一种类型，可以定义变量</h1><ul>
+<li>结构体—结构体方法—接口</li>
+<li>接口类型的变量，能够储存所有实现了该接口的结构体。</li>
+<li>实例化一个变量（对象）</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-keyword">type</span> animal <span class="hljs-keyword">interface</span> &#123;<br>	say()<br>&#125;<br><br><span class="hljs-keyword">type</span> cat <span class="hljs-keyword">struct</span> &#123;<br>	Name <span class="hljs-type">string</span><br>&#125;<br><span class="hljs-keyword">type</span> dog <span class="hljs-keyword">struct</span> &#123;<br>	Name <span class="hljs-type">string</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c cat)</span></span> say() &#123;<br>	fmt.Printf(<span class="hljs-string">&quot;%v小猫喵喵叫\n&quot;</span>, c.Name)<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(d dog)</span></span> say() &#123;<br>	fmt.Printf(<span class="hljs-string">&quot;%v小狗汪汪叫\n&quot;</span>, d.Name)<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">var</span> a animal<br>	fmt.Printf(<span class="hljs-string">&quot;类型是:%T\n&quot;</span>, a)    <span class="hljs-comment">//打印的类型是nil 类型</span><br>	fmt.Printf(<span class="hljs-string">&quot;打印的内容是:%v\n&quot;</span>, a) <span class="hljs-comment">// 这个a 是一个接口类型的实例化对象，所以打印是没有数据的 打印的是nil</span><br>	c := cat&#123;<span class="hljs-string">&quot;小花&quot;</span>&#125;<br>	a = c          <span class="hljs-comment">//这个时候把c赋值给了a，所以a有c的属性</span><br>	fmt.Println(a) <span class="hljs-comment">//所以打印的时候，就可以打印a了，</span><br>	a.say()<br><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h1 id="定义指针类型和值类型接收器实现接口"><a href="#定义指针类型和值类型接收器实现接口" class="headerlink" title="定义指针类型和值类型接收器实现接口"></a>定义指针类型和值类型接收器实现接口</h1><ul>
+<li>值类型接口实现后，不管是结构体还是结构体指针的变量，都可以赋值给接口变量</li>
+<li>只要是值接收器，修改的都是新的。</li>
+<li>使用指针接收器实现接口之后，只能将结构体指针变量赋值给该接口变量</li>
+<li>只要是指针接收器，修改的都是原来的。、</li>
+</ul>
+<p><strong>你在定义结构体方法的时候，将入参定义为指针类型入参即可，</strong></p>
+<p><strong>这样你在实例化这个结构体的时候，传入指针类型即可</strong> </p>
 
                 
               </div>
@@ -345,8 +361,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>go语言json序列化和反序列化</div>
-      <div>http://example.com/2023/12/06/11.1 go语言json序列化和反序列化/</div>
+      <div>go语言之接口(interface)</div>
+      <div>http://example.com/2023/12/06/go语言之接口(interface)/</div>
     </div>
     <div class="license-meta">
       
@@ -390,9 +406,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/12/06/go%E8%AF%AD%E8%A8%80%E4%B9%8B%E6%8E%A5%E5%8F%A3(interface)/" title="go语言之接口(interface)">
+                      <a href="/2023/12/07/go%E8%AF%AD%E8%A8%80%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%EF%BC%88goroutine%E3%80%81channel%E3%80%81SELECT%EF%BC%89/" title="go语言并发编程基础（goroutine、channel、SELECT）">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">go语言之接口(interface)</span>
+                        <span class="hidden-mobile">go语言并发编程基础（goroutine、channel、SELECT）</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -400,8 +416,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/12/05/first/" title="这是一个标题">
-                        <span class="hidden-mobile">这是一个标题</span>
+                      <a href="/2023/12/06/11.1%20go%E8%AF%AD%E8%A8%80json%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" title="go语言json序列化和反序列化">
+                        <span class="hidden-mobile">go语言json序列化和反序列化</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
