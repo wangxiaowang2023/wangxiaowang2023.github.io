@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>djangoAdmin部署记录</title>
+    <link href="/2023/12/15/djangoAdmin%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95/"/>
+    <url>/2023/12/15/djangoAdmin%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95/</url>
+    
+    <content type="html"><![CDATA[<h1 id="部署笔记"><a href="#部署笔记" class="headerlink" title="部署笔记"></a>部署笔记</h1><h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><blockquote><p>Python &gt;&#x3D; 3.8.0 (推荐3.9+版本)<br>nodejs &gt;&#x3D; 14.0 (推荐最新)<br>Mysql &gt;&#x3D; 5.7.0 (可选，默认数据库sqlite3，推荐8.0版本)<br>Redis(可选，最新版)</p></blockquote><h2 id="后端代码"><a href="#后端代码" class="headerlink" title="后端代码"></a>后端代码</h2><h3 id="拉代码部署"><a href="#拉代码部署" class="headerlink" title="拉代码部署"></a>拉代码部署</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">拉代码</span><br>进入后端项目目录:cd backend<br>在项目根目录中，复制 ./conf/env.example.py 文件为一份新的到 ./conf/env.py 下，并重命名为env.py<br>在 env.py 中配置数据库信息(默认数据库为sqlite3，测试演示可忽略此步骤)<br><span class="hljs-meta prompt_"># </span><span class="language-bash">docker 部署mysql</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">docker创建数据库 DATABASE_NAME = <span class="hljs-string">&#x27;django-vue-admin&#x27;</span> <span class="hljs-comment"># mysql 时使</span></span><br>安装依赖环境: pip3 install -r requirements.txt<br>如果有碰到mysqlclient 无法安装的时候，查一下手册，mac是要brew install mysql <br>执行迁移命令: python3 manage.py makemigrations python3 manage.py migrate<br>初始化数据: python3 manage.py init<br>初始化省市县数据: python3 manage.py init_area<br>启动项目: python3 manage.py runserver 0.0.0.0:8000<br><span class="hljs-meta prompt_"># </span><span class="language-bash">docker 部署mysql</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">docker创建数据库 DATABASE_NAME = <span class="hljs-string">&#x27;django-vue-admin&#x27;</span> <span class="hljs-comment"># mysql 时使用</span></span><br><br></code></pre></td></tr></table></figure><h3 id="改验证码逻辑"><a href="#改验证码逻辑" class="headerlink" title="改验证码逻辑"></a>改验证码逻辑</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 在 login.py文件的第85行 改</span><br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-keyword">if</span> self.image_code <span class="hljs-keyword">and</span> ((<br>                                                self.image_code.response == captcha<br>                                                <span class="hljs-keyword">or</span> self.image_code.challenge == captcha<br>                                        ) <span class="hljs-keyword">or</span> captcha.isdigit() <span class="hljs-keyword">and</span> <span class="hljs-built_in">len</span>(captcha) == <span class="hljs-number">6</span>):<br>                    self.image_code <span class="hljs-keyword">and</span> self.image_code.delete()<br>                <span class="hljs-keyword">else</span>:<br>                    self.image_code <span class="hljs-keyword">and</span> self.image_code.delete()<br>                    <span class="hljs-keyword">raise</span> CustomValidationError(<span class="hljs-string">&quot;图片验证码错误&quot;</span>)<br></code></pre></td></tr></table></figure><h3 id="再启服务"><a href="#再启服务" class="headerlink" title="再启服务"></a>再启服务</h3><p>执行迁移命令: python3 manage.py makemigrations python3 manage.py migrate<br>初始化数据: python3 manage.py init<br>初始化省市县数据: python3 manage.py init_area<br>启动项目: python3 manage.py runserver 0.0.0.0:8000</p><p>访问地址：[<a href="http://localhost:8000/">http://localhost:8000</a></p><h1 id="前端部署"><a href="#前端部署" class="headerlink" title="前端部署"></a>前端部署</h1><ol><li>进入前端项目目录 <code>cd web</code></li><li>安装依赖 <code>npm install --registry= https://registry.npmmirror.com</code><ol><li>注意一下npm的源 npm config set registry <a href="https://registry.npmmirror.com/">https://registry.npmmirror.com</a></li><li>你可以使用以下命令来查看当前npm的下载源设置：npm config get registry</li><li>安装nodejs &gt;&#x3D; 14.0 (推荐最新)</li></ol></li><li>启动服务 <code>npm run dev</code></li></ol><h1 id="访问项目"><a href="#访问项目" class="headerlink" title="访问项目"></a>访问项目</h1><ul><li>访问地址：<a href="http://localhost:8080/">http://localhost:8080 (opens new window)</a>(默认为此地址，如有修改请按照配置文件)</li><li>账号：<code>superadmin</code> 密码：<code>admin123456</code></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>笔记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>python</tag>
+      
+      <tag>部署</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>go语言之并发编程基础（goroutine、channel、SELECT）</title>
     <link href="/2023/12/07/go%E8%AF%AD%E8%A8%80%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%EF%BC%88goroutine%E3%80%81channel%E3%80%81SELECT%EF%BC%89/"/>
     <url>/2023/12/07/go%E8%AF%AD%E8%A8%80%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%EF%BC%88goroutine%E3%80%81channel%E3%80%81SELECT%EF%BC%89/</url>
