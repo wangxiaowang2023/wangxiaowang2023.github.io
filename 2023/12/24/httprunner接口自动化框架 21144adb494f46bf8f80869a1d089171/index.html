@@ -1,0 +1,867 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Wangxiaowang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="httprunner接口自动化框架一、为什么选择httprunner？ HttpRunner是一个开源的 API 测试工具环境搭建，相比于其它 API 测试工具，HttpRunner 最大的不同在于设计理念： 约定大于配置：测试用例是标准结构化的，格式统一，方便协作和维护； 标准开放：基于开放的标准，支持HAR&#x2F;Postman&#x2F;Swagger等工具对接，轻松实现用例生成和转换；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【python】httprunner接口自动化框架">
+<meta property="og:url" content="http://example.com/2023/12/24/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/index.html">
+<meta property="og:site_name" content="Wang">
+<meta property="og:description" content="httprunner接口自动化框架一、为什么选择httprunner？ HttpRunner是一个开源的 API 测试工具环境搭建，相比于其它 API 测试工具，HttpRunner 最大的不同在于设计理念： 约定大于配置：测试用例是标准结构化的，格式统一，方便协作和维护； 标准开放：基于开放的标准，支持HAR&#x2F;Postman&#x2F;Swagger等工具对接，轻松实现用例生成和转换；">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/bing_2022_OHR.NaqsheRustam.jpg">
+<meta property="article:published_time" content="2023-12-24T06:11:45.000Z">
+<meta property="article:modified_time" content="2023-12-25T02:49:10.334Z">
+<meta property="article:author" content="Wangxiaowang">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="部署">
+<meta property="article:tag" content="接口自动化">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/bing_2022_OHR.NaqsheRustam.jpg">
+  
+  
+  
+  <title>【python】httprunner接口自动化框架 - Wang</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Home</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bing_2020_OHR.MistyVineyard.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【python】httprunner接口自动化框架"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-12-24 14:11" pubdate>
+          2023年12月24日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          37 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">【python】httprunner接口自动化框架</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id=""><a href="#" class="headerlink" title=""></a></h1><h1 id="httprunner接口自动化框架"><a href="#httprunner接口自动化框架" class="headerlink" title="httprunner接口自动化框架"></a>httprunner接口自动化框架</h1><h1 id="一、为什么选择httprunner？"><a href="#一、为什么选择httprunner？" class="headerlink" title="一、为什么选择httprunner？"></a>一、为什么选择httprunner？</h1><ul>
+<li>HttpRunner是一个开源的 API 测试工具环境搭建，相比于其它 API 测试工具，HttpRunner 最大的不同在于设计理念：</li>
+<li>约定大于配置：测试用例是标准结构化的，格式统一，方便协作和维护；</li>
+<li>标准开放：基于开放的标准，支持HAR&#x2F;Postman&#x2F;Swagger等工具对接，轻松实现用例生成和转换；</li>
+<li>一次投入多维复用：一套脚本可同时支持接口自动化测试、性能测试；</li>
+<li>追求不重复造轮子，追求投入产出比；</li>
+<li>Httprunner和其他开源框架相比，我们只需在yaml文件维护测试用例即可，不需要代码要求，但是需要严格遵循yanl格式编写，否则在后续不好排查错误，这也是httprunner的一个缺点；</li>
+<li>目前市面上接口工具多，学习成本高，团队协作较困难，对语言能力有一定要求，门槛较高；</li>
+</ul>
+<h1 id="二、环境搭建（Python安装）"><a href="#二、环境搭建（Python安装）" class="headerlink" title="二、环境搭建（Python安装）"></a>二、环境搭建（Python安装）</h1><h2 id="1、python版本：2-7-3-7及以上版本，建议3-7及以上版本"><a href="#1、python版本：2-7-3-7及以上版本，建议3-7及以上版本" class="headerlink" title="1、python版本：2.7&#x2F;3.7及以上版本，建议3.7及以上版本"></a>1、python版本：2.7&#x2F;3.7及以上版本，建议3.7及以上版本</h2><ul>
+<li>下载地址：<a target="_blank" rel="noopener" href="https://www.python.org/downloads/">https://www.python.org/downloads/</a></li>
+</ul>
+<h2 id="2、验证安装是否成功"><a href="#2、验证安装是否成功" class="headerlink" title="2、验证安装是否成功"></a>2、验证安装是否成功</h2><ul>
+<li>打开cmd命令行 输入python，如果能进入python命令模式就证明成功了</li>
+<li></li>
+</ul>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h2 id="3、安装httprunner第三方库"><a href="#3、安装httprunner第三方库" class="headerlink" title="3、安装httprunner第三方库"></a>3、安装httprunner第三方库</h2><p>pip install httprunner&#x3D;&#x3D;2.5.7 如果官网无法下载就加国内镜像 -i <a target="_blank" rel="noopener" href="https://pypi.doubanio.com/simple">https://pypi.doubanio.com/simple</a></p>
+<h2 id="4、查看命令行指令（掌握几个常用即可）"><a href="#4、查看命令行指令（掌握几个常用即可）" class="headerlink" title="4、查看命令行指令（掌握几个常用即可）"></a>4、查看命令行指令（掌握几个常用即可）</h2><ul>
+<li>创建一个项目，可以在命令行查看httprunner帮助</li>
+<li>httprunner -h 或者 hrun -h</li>
+</ul>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%201.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%202.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h2 id="5、创建脚手架"><a href="#5、创建脚手架" class="headerlink" title="5、创建脚手架"></a>5、创建脚手架</h2><ul>
+<li>创建项目：hrun –startproject demo</li>
+</ul>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%203.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h2 id="6、安装第三方依赖（）"><a href="#6、安装第三方依赖（）" class="headerlink" title="6、安装第三方依赖（）"></a>6、安装第三方依赖（）</h2><ul>
+<li>可以在根目录下建个requirements.txt文件，需要安装的python依赖都在这个文件里面，进入到目录下，执行以下命令进行安装：</li>
+</ul>
+<p>pip install –r requirements2.txt</p>
+<h1 id="三、框架结构"><a href="#三、框架结构" class="headerlink" title="三、框架结构"></a>三、框架结构</h1><h2 id="1、目录结构"><a href="#1、目录结构" class="headerlink" title="1、目录结构"></a>1、目录结构</h2><p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%204.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h3 id="分层思想："><a href="#分层思想：" class="headerlink" title="分层思想："></a>分层思想：</h3><ul>
+<li>api定义层：最底下的一层是api的定义层，最底</li>
+<li>testcase层：测试用例层，调用定义层的内容，中间</li>
+<li>testsuite：测试套件层，把用例装起来，最上</li>
+<li></li>
+</ul>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%205.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h3 id="api目录：存放描述api信息的yaml文件"><a href="#api目录：存放描述api信息的yaml文件" class="headerlink" title="api目录：存放描述api信息的yaml文件"></a>api目录：存放描述api信息的yaml文件</h3><ul>
+<li>特别注意：yml文件需遵循严格的缩进，缩进多少格无所谓，只要保证同一层级的key对齐即可</li>
+</ul>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%206.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h3 id="字段解释："><a href="#字段解释：" class="headerlink" title="字段解释："></a>字段解释：</h3><ul>
+<li>name：对api进行描述</li>
+<li>variables：把参数作为变量从外部传给api，可以将变量的参数都定义在variables</li>
+<li>request：这个字段下放的都是api的基本信息如<ul>
+<li>url(请求地址)，</li>
+<li>method(请求方法)，</li>
+<li>headers(请求头)，</li>
+<li>data&#x2F;params&#x2F;json&#x2F;file (请求参数)</li>
+</ul>
+</li>
+</ul>
+<h3 id="一般接口有3种方式的请求参数"><a href="#一般接口有3种方式的请求参数" class="headerlink" title="一般接口有3种方式的请求参数"></a>一般接口有3种方式的请求参数</h3><ul>
+<li>1.params字段传参：<ul>
+<li>以key，value键值对方式放在url后面的参数用params字段去定义</li>
+</ul>
+</li>
+<li>2.json字段传参：<ul>
+<li>放在body以json格式参数的用json字段去定义</li>
+</ul>
+</li>
+<li>3.c.data字段传参：<ul>
+<li>放在body非json格式的参数用data字段去定义，如headers中</li>
+</ul>
+</li>
+</ul>
+<p>content-type&#x3D;application&#x2F;x-www-form-urlencoded</p>
+<h3 id="参数引用：引用符："><a href="#参数引用：引用符：" class="headerlink" title="参数引用：引用符：$"></a>参数引用：引用符：$</h3><p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%207.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<ul>
+<li>variables：api的ymal文件下：如果我们要把参数作为变量从外部传给api，那就把作为变量的参数都定义在variables字段下，如下图中的loginPara就可以被其它任何地方引用。</li>
+</ul>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%208.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<ul>
+<li>validate：校验字段，需要校验的数据都写在这个字段下</li>
+</ul>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%209.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h3 id="1-2-testcases目录：存放描述测试用例的yaml文件"><a href="#1-2-testcases目录：存放描述测试用例的yaml文件" class="headerlink" title="1.2 testcases目录：存放描述测试用例的yaml文件"></a>1.2 testcases目录：存放描述测试用例的yaml文件</h3><ul>
+<li>config:指这条用例的配置信息，用例的一些配置信息可以写在这个字段下面，比如：<ul>
+<li>name(必须的)：　这条用例的名字，</li>
+<li>base_url(可选择的)： 接口的host地址，一般写域名</li>
+<li>variables(可选择的)： 这条用例的一些变量，保存的变量，可以被下面引用</li>
+<li>verify(可选，但默认false)：指定是否验证服务器的TLS证书。如果想要记录testcase中的http数据特别有用。如果不设置或者设置为true则会产生SSLError错误。</li>
+<li>export(可选择的，必须会)：提取testcase的session变量。测试用例是为黑盒，config中的的variables视为输入，export为输出。特别是，当该testcase中的某个输出作为下一个testcase中的输入的时候特别有用。参数传递用的，</li>
+<li>output(可选择的)：为了把变量暴露出来，打印日志时看的更清楚（比如说你提取了token,可以打印一下这个token看看自己有没有提取成功）</li>
+</ul>
+</li>
+</ul>
+<h3 id="teststeps-：指用例中的步骤，每一步就是调用一个api，test下面配置的字段就是这个步骤中涉及的字段，比如："><a href="#teststeps-：指用例中的步骤，每一步就是调用一个api，test下面配置的字段就是这个步骤中涉及的字段，比如：" class="headerlink" title="teststeps:：指用例中的步骤，每一步就是调用一个api，test下面配置的字段就是这个步骤中涉及的字段，比如："></a>teststeps:：指用例中的步骤，每一步就是调用一个api，test下面配置的字段就是这个步骤中涉及的字段，比如：</h3><ul>
+<li><p>name：步骤描述</p>
+</li>
+<li><p>api： 指定调用的api路径文件。基于根目录的相对路径</p>
+</li>
+<li><p>testcase： 指定testcase的路径文件</p>
+</li>
+<li><p>extract： 提取响应中的字段（比如这个接口返回中的某个字段作为下	一个接口的参数），可以提取的内容包含以下内容：</p>
+<ul>
+<li>atus_code、cookies、elapsed（响应时间）、headers、content、 text、	json、	encoding、ok、 reason、url</li>
+</ul>
+</li>
+<li><p>variables：如果要把参数作为变量从外部传给api，那就把作为变量的 参数都定义在variables字段下，设置变量供下面用</p>
+<ul>
+<li><h2 id="引用debugtalk里面的数据库查询方法时，要在这里定义一个字段，-先把sql语句定义成一个字段，然后把sql语句引用到方法里面去，如下：-参数引用-ENV-STATIONNAME-的时候，要在variables下面先定义再引用"><a href="#引用debugtalk里面的数据库查询方法时，要在这里定义一个字段，-先把sql语句定义成一个字段，然后把sql语句引用到方法里面去，如下：-参数引用-ENV-STATIONNAME-的时候，要在variables下面先定义再引用" class="headerlink" title="引用debugtalk里面的数据库查询方法时，要在这里定义一个字段，  - 先把sql语句定义成一个字段，然后把sql语句引用到方法里面去，如下：  - 参数引用${ENV(STATIONNAME)的时候，要在variables下面先定义再引用"></a>引用debugtalk里面的数据库查询方法时，要在这里定义一个字段，<br>  - 先把sql语句定义成一个字段，然后把sql语句引用到方法里面去，如下：<br>  - <code>参数引用$&#123;ENV(STATIONNAME)的时候，要在variables下面先定义再引用</code></h2>  <img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2010.png" srcset="/img/loading.gif" lazyload alt="Untitled"></li>
+</ul>
+</li>
+<li><p>validate：校验字段，需要校验的数据都写在这个字段下，就是断言，下面会讲断言用法</p>
+</li>
+<li><p>⑦　碰到列表的时候，用list.0去提取。点0是表示提取索引下标为0的列表进行提取</p>
+<ul>
+<li><code>- eq: [ json.data.list.0.couponName, &quot;自动化测试兑换&quot; ]</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="testsuites目录：存放用例集的yaml文件"><a href="#testsuites目录：存放用例集的yaml文件" class="headerlink" title="testsuites目录：存放用例集的yaml文件"></a>testsuites目录：存放用例集的yaml文件</h2><p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2011.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h3 id="字段解释：-1"><a href="#字段解释：-1" class="headerlink" title="字段解释："></a>字段解释：</h3><ol>
+<li>testcases：指这条用例集，要执行的用例都现在这个字段下面</li>
+<li>testcase：用例的路径字段</li>
+<li>parameters：参数化字段，外部传的参给用例，都可以写在这个字段下面，测试数据中的参数可以写在这下面</li>
+</ol>
+<h3 id="用例编写"><a href="#用例编写" class="headerlink" title="用例编写"></a>用例编写</h3><ul>
+<li>参数引用：在yaml文件中用“$”符号实现对参数的引用 比如:</li>
+</ul>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2012.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<ul>
+<li>2.2函数引用：在yaml文件中通过“${}”实现对函数的引用，比如：</li>
+</ul>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2013.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<ul>
+<li>所有函数都定义在debugtalk.py文件中，</li>
+<li>如果在测试中有需要写代码处理的，就可以把代码写在debugtalk.py文件中，然后用例中就可以直接引用了。</li>
+</ul>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2014.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h1 id="运行接口"><a href="#运行接口" class="headerlink" title="运行接口"></a>运行接口</h1><h2 id="方式一："><a href="#方式一：" class="headerlink" title="方式一："></a>方式一：</h2><ul>
+<li>使用命令行调试：hrun .\testsuites\xx测试集.yml</li>
+<li>如果要打印运行详细日志，在命令后面加上–log-level</li>
+</ul>
+<p>hrun .\testsuites\xx测试集.yml –log-level debug</p>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2015.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2016.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h2 id="方式二："><a href="#方式二：" class="headerlink" title="方式二："></a>方式二：</h2><ul>
+<li>在工程跟目录下有一个runtest.py文件，里面指定要执行的文件路径就可以运用用例了，右键——Run rentest 就可以执行，执行后会在report目录下生成测试报告</li>
+<li>通过<code>os.system</code>可以调用cmd命令，方便自己调试用。</li>
+<li>注意一下，cmd命令的斜杠是反斜杠，注意斜杠加t需要双斜杠，不然会编译错误</li>
+<li></li>
+</ul>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2017.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2018.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h1 id="测试报告"><a href="#测试报告" class="headerlink" title="测试报告"></a>测试报告</h1><p>报告保存在report目录下，每次执行完都会生成测试报告，用浏览器即可打开进行查看</p>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2019.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2020.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h2 id="一些特殊接口—图片上传接口"><a href="#一些特殊接口—图片上传接口" class="headerlink" title="一些特殊接口—图片上传接口"></a>一些特殊接口—图片上传接口</h2><p>用抓包软件看到接口传参如图所示</p>
+<p>注意：requests库会自动添加这个元素 {“Content-Type”:”multipart&#x2F;form-data”} ；加了反而会报错，从而导致请求不成功。</p>
+<p>在前端允许和支持上传的所有格式文件中，当选择不同格式文件时对接口发起请求时，</p>
+<p>Form Data会自动识别文件的Content-Type【根据传入的文件格式自动解析为headers中的Content-Type】以及Content-Disposition【该字段中包括接口的传参类型（例如下图的form-data），传入文件名（例如下图的filename）等】。</p>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2021.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p>所以参数我们可以如图中files字段那样定义</p>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2022.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h2 id="测试数据"><a href="#测试数据" class="headerlink" title="测试数据"></a>测试数据</h2><p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2023.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p>data目录下就是存放测试数据文件，我们需要上传文件或图片的数据可以放在这个目录下，或api中的一些参数数据可以以csv文件格式存放在这个目录下</p>
+<h1 id="参数化："><a href="#参数化：" class="headerlink" title="参数化："></a>参数化：</h1><h2 id="对测试数据的引用"><a href="#对测试数据的引用" class="headerlink" title="对测试数据的引用"></a>对测试数据的引用</h2><ul>
+<li>在用例中怎么使用测试数据文件中的数据呢，</li>
+<li>框架中有个读取数据文件的函数P，</li>
+<li>引用时参入数据文件地址作为参数 ${P(data&#x2F;对应的csv.csv)} 对应的csv.csv 文件内容如图，</li>
+</ul>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2024.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<ul>
+<li>注意：只能在testsuite中对测试数据的引用，测试数据中的参数可以 字段名-字段名的方式进行获取。qudaologin.csv中有几条记录，这样用例就会执行几次</li>
+<li>再说一遍，只能在testsuite里面引用csv参数，<ul>
+<li>在testcase的下面加一个字段parameters：下面再接需要被传参的字段名</li>
+<li>csv的参数有多少行，对应的用例就会被执行多少次</li>
+</ul>
+</li>
+</ul>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2025.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h2 id="直接赋值参数"><a href="#直接赋值参数" class="headerlink" title="直接赋值参数"></a>直接赋值参数</h2><ul>
+<li>多个关联参数，可以按照下图中的方式对用例参数进行赋值，进行该配置后，测试用例在运行时就会对 name，result实现数据驱动，即分别运行 3次测试，并且保证参数值总是成对使用。</li>
+</ul>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2026.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h2 id="单个参数关联"><a href="#单个参数关联" class="headerlink" title="单个参数关联"></a>单个参数关联</h2><ul>
+<li>单个参数可以直接就可以按照如下方式进行配置，即分别使用 [1,2,3,4,5,6,7] 7个值运行测试用例。</li>
+</ul>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2027.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h1 id="环境变量："><a href="#环境变量：" class="headerlink" title="环境变量："></a>环境变量：</h1><ul>
+<li>工程目录下有个.env文件，里面可以配置测试环境的地址，如图所示</li>
+</ul>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2028.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<ul>
+<li>框架有个获取环境文件的函数ENV, 调用时可以引用函数获取变量${ENV(TESTENV)}</li>
+</ul>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2029.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h1 id="9-断言校验"><a href="#9-断言校验" class="headerlink" title="9. 断言校验"></a>9. 断言校验</h1><h2 id="框架中已实现如下校验"><a href="#框架中已实现如下校验" class="headerlink" title="框架中已实现如下校验"></a>框架中已实现如下校验</h2><p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2030.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2031.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h2 id="9-2自定义校验函数"><a href="#9-2自定义校验函数" class="headerlink" title="9.2自定义校验函数"></a>9.2自定义校验函数</h2><p>对于自定义的校验函数，需要遵循三个规则：</p>
+<ol>
+<li>自定义校验函数需放置到debugtalk.py中</li>
+<li>参数有两个：第一个为原始数据，第二个为原始数据经过运算后得到的预期结果值</li>
+<li>在校验函数中通过assert将实际运算结果与预期结果值进行比较</li>
+</ol>
+<p>如图：在debugtalk.py文件中定义校验函数</p>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2032.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p>然后在用例校验的时候引用这个校验函数</p>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2033.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h2 id="9-3修改框架校验函数：不建议"><a href="#9-3修改框架校验函数：不建议" class="headerlink" title="9.3修改框架校验函数：不建议"></a>9.3修改框架校验函数：不建议</h2><ul>
+<li>在httprunner&gt;builtin&gt;comparator新增自定义校验，然后在parser文件中定义校验缩写方法</li>
+</ul>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2034.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2035.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h2 id="9-4校验支持正则校验："><a href="#9-4校验支持正则校验：" class="headerlink" title="9.4校验支持正则校验："></a>9.4校验支持正则校验：</h2><p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2036.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2037.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<h2 id="9-5数据库校验："><a href="#9-5数据库校验：" class="headerlink" title="9.5数据库校验："></a>9.5数据库校验：</h2><p>框架实现了对数据库的查询，操作数据库的原理是根据输入的SQL语句 过滤出要操作的tableName, 然后去配置文件中找到对应得tableName所在的地址和库进行连接和操作，操作数据库需要做如下配置，在跟目录下有个database.ini文件，在里面配置数据库相关信息</p>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2038.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+<p><img src="/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/Untitled%2039.png" srcset="/img/loading.gif" lazyload alt="Untitled"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/python/" class="category-chain-item">python</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/python/" class="print-no-link">#python</a>
+      
+        <a href="/tags/%E9%83%A8%E7%BD%B2/" class="print-no-link">#部署</a>
+      
+        <a href="/tags/%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96/" class="print-no-link">#接口自动化</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【python】httprunner接口自动化框架</div>
+      <div>http://example.com/2023/12/24/httprunner接口自动化框架 21144adb494f46bf8f80869a1d089171/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Wangxiaowang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年12月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/12/25/first/" title="这是一个标题">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">这是一个标题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/12/23/WSL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" title="【other】WSL基础使用指南">
+                        <span class="hidden-mobile">【other】WSL基础使用指南</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

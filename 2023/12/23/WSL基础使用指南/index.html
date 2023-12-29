@@ -1,0 +1,708 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Wangxiaowang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="WSL使用指南1、WSL介绍和安装一、简介 Windows Subsystem for Linux（简称WSL）是一个在Windows 10\11上能够运行原生Linux二进制可执行文件（ELF格式）的兼容层。它是由微软与Canonical公司合作开发，其目标是使纯正的Ubuntu、Debian等映像能下载和解压到用户的本地计算机，并且映像内的工具和实用工具能在此子系统上原生运行。 优势：开发人员">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【other】WSL基础使用指南">
+<meta property="og:url" content="http://example.com/2023/12/23/WSL%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="Wang">
+<meta property="og:description" content="WSL使用指南1、WSL介绍和安装一、简介 Windows Subsystem for Linux（简称WSL）是一个在Windows 10\11上能够运行原生Linux二进制可执行文件（ELF格式）的兼容层。它是由微软与Canonical公司合作开发，其目标是使纯正的Ubuntu、Debian等映像能下载和解压到用户的本地计算机，并且映像内的工具和实用工具能在此子系统上原生运行。 优势：开发人员">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/bing_2018_OyamaLeaves.jpg">
+<meta property="article:published_time" content="2023-12-23T15:11:45.000Z">
+<meta property="article:modified_time" content="2023-12-25T02:49:10.334Z">
+<meta property="article:author" content="Wangxiaowang">
+<meta property="article:tag" content="部署">
+<meta property="article:tag" content="wsl">
+<meta property="article:tag" content="windows">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/bing_2018_OyamaLeaves.jpg">
+  
+  
+  
+  <title>【other】WSL基础使用指南 - Wang</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Home</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bing_2017_RotenbergVineyards.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【other】WSL基础使用指南"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-12-23 23:11" pubdate>
+          2023年12月23日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          67 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">【other】WSL基础使用指南</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="WSL使用指南"><a href="#WSL使用指南" class="headerlink" title="WSL使用指南"></a>WSL使用指南</h1><h1 id="1、WSL介绍和安装"><a href="#1、WSL介绍和安装" class="headerlink" title="1、WSL介绍和安装"></a>1、WSL介绍和安装</h1><h4 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h4><ul>
+<li>Windows Subsystem for Linux（简称WSL）是一个在Windows 10\11上能够运行原生Linux二进制可执行文件（ELF格式）的兼容层。它是由微软与Canonical公司合作开发，其目标是使纯正的Ubuntu、Debian等映像能下载和解压到用户的本地计算机，并且映像内的工具和实用工具能在此子系统上原生运行。</li>
+<li><strong>优势</strong>：开发人员可以在 Windows 计算机上同时访问 Windows 和 Linux 的强大功能。 通过适用于 Linux 的 Windows 子系统 (WSL)，开发人员可以安装 Linux 发行版（例如 Ubuntu、OpenSUSE、Kali、Debian、Arch Linux 等），并直接在 Windows 上使用 Linux 应用程序、实用程序和 Bash 命令行工具，不用进行任何修改，也无需承担传统虚拟机或双启动设置的费用。</li>
+<li>一句话，<strong>在windows上不需要通过虚拟机运行Linux</strong> ，</li>
+</ul>
+<h4 id="二、准备工作"><a href="#二、准备工作" class="headerlink" title="二、准备工作"></a>二、准备工作</h4><p>先开启Windows对子系统的支持：<strong>控制面板–&gt;程序–&gt;启用或关闭Windows功能</strong></p>
+<ul>
+<li>打开Hyper-V</li>
+<li>打开适用于Linux的Windows子系统</li>
+</ul>
+<h4 id="三、安装WSL"><a href="#三、安装WSL" class="headerlink" title="三、安装WSL"></a>三、安装WSL</h4><h5 id="1-启用适用于-Linux-的-Windows-子系统"><a href="#1-启用适用于-Linux-的-Windows-子系统" class="headerlink" title="1 启用适用于 Linux 的 Windows 子系统"></a>1 启用适用于 Linux 的 Windows 子系统</h5><p>需要先启用“适用于 Linux 的 Windows 子系统”可选功能，然后才能在 Windows 上安装 Linux 分发。</p>
+<p>以管理员身份打开 PowerShell（“开始”菜单 &gt;“PowerShell” &gt;单击右键 &gt;“以管理员身份运行”），然后输入以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart<br></code></pre></td></tr></table></figure>
+
+<h5 id="2-启用虚拟机功能"><a href="#2-启用虚拟机功能" class="headerlink" title="2 启用虚拟机功能"></a>2 启用虚拟机功能</h5><p>安装 WSL 2 之前，必须启用“虚拟机平台”可选功能。 计算机需要虚拟化功能才能使用此功能。</p>
+<p>以管理员身份打开 PowerShell 并运行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart<br></code></pre></td></tr></table></figure>
+
+<p><strong>重新启动计算机，以完成 WSL 安装并更新到 WSL 2。</strong></p>
+<p>安装完重启后在PowerShell中设置默认为WSL2：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">wsl --set-default-version 2<br></code></pre></td></tr></table></figure>
+
+<h5 id="3-安装所选的-Linux-分发"><a href="#3-安装所选的-Linux-分发" class="headerlink" title="3  安装所选的 Linux 分发"></a>3  安装所选的 Linux 分发</h5><p>在MicroSoft Store中搜索并下载想要使用的linux版本，我这里使用的ubuntu 20版本（或22版本）</p>
+<p><strong>4  运行WSL</strong></p>
+<p>终端使用命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">wsl -h # 查看命令help<br>wsl # 运行wsl<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="2、进入WSL-安装开启ssh远程"><a href="#2、进入WSL-安装开启ssh远程" class="headerlink" title="2、进入WSL 安装开启ssh远程"></a>2、进入WSL 安装开启ssh远程</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo passwd root   #设置root账号密码。根据提示输入root密码即可。<br>12345678<br>su User  #切换账号. root账号是 # 结尾，非root账号是 $结尾<br><br>// 更新环境<br>sudo apt-get update<br><br>ifconfig # 如果没有就执行下面的<br>sudo apt-get install net-tools<br><br>// 安装ssh<br>sudo apt-get install openssh-server<br><br>sudo apt-get install openssh-server<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">编辑sshd_config文件</span><br>vim /etc/ssh/sshd_config<br><br>Port 2222   #设置ssh的端口号, 由于22在windows中有别的用处, 尽量不修改系统的端口号<br>PermitRootLogin yes   # 可以root远程登录<br>PasswordAuthentication yes     # 密码验证登录<br><span class="hljs-meta prompt_">#</span><span class="language-bash">设置SSH的端口号,尽量避免与Windows端口号冲突</span><br>Port 2345<br><span class="hljs-meta prompt_">#</span><span class="language-bash">允许远程登录</span><br>PermitRootLogin yes   <br><span class="hljs-meta prompt_">#</span><span class="language-bash">使用密码登录</span><br>PasswordAuthentication yes<br><span class="hljs-meta prompt_">#</span><span class="language-bash">SSH登录时的用户名字</span><br>AllowUsers wsl_username<br><br>安装ssh<br>apt-get install ssh<br><br>开启 ssh<br>/etc/init.d/ssh start<br><br>出现* Starting OpenBSD Secure Shell server sshd报错就<br><span class="hljs-meta prompt_">$ </span><span class="language-bash">ssh-keygen -A</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">/etc/init.d/ssh start</span><br>可以远程连接了<br>sudo ps -e | grep ssh # 输入查看有没有启动成功<br>如果显示对应的端口号，就说明启动成功了<br><br></code></pre></td></tr></table></figure>
+
+<h1 id="3、更新服务器软件源（阿里云源）并更新软件"><a href="#3、更新服务器软件源（阿里云源）并更新软件" class="headerlink" title="3、更新服务器软件源（阿里云源）并更新软件"></a><strong>3、更新服务器软件源（阿里云源）并更新软件</strong></h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">使用 root 权限登录，后续输入密码</span><br>sudo -i<br><span class="hljs-meta prompt_"> </span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">接下来备份当前源，输入以下命令</span><br>cp /etc/apt/sources.list /etc/apt/sources.list.old <br><span class="hljs-meta prompt_"> </span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">这个sources.list文件就是源文件，删除该文件，重新写一个</span><br>rm /etc/apt/sources.list<br>vim /etc/apt/sources.list<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="更新软件源（阿里云源）并更新软件"><a href="#更新软件源（阿里云源）并更新软件" class="headerlink" title="更新软件源（阿里云源）并更新软件"></a><strong>更新软件源（阿里云源）并更新软件</strong></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">使用 root 权限登录，后续输入密码</span><br>sudo -i<br><span class="hljs-meta prompt_"> </span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">接下来备份当前源，输入以下命令</span><br>cp /etc/apt/sources.list /etc/apt/sources.list.old <br><span class="hljs-meta prompt_"> </span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">这个sources.list文件就是源文件，删除该文件，重新写一个</span><br>rm /etc/apt/sources.list<br>vim /etc/apt/sources.list<br></code></pre></td></tr></table></figure>
+
+<p>复制下面内容，然后单击右键粘贴进去即可，之后按ESC，输入wq保存并退出。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs shell">deb http://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse<br>deb http://mirrors.aliyun.com/ubuntu/ jammy-security main restricted universe multiverse<br>deb http://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse<br>deb http://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse<br><span class="hljs-meta prompt_"> </span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">deb-src http://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">deb-src http://mirrors.aliyun.com/ubuntu/ jammy-security main restricted universe multiverse</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">deb-src http://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">deb-src http://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse</span><br><span class="hljs-meta prompt_"> </span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment"># Pre-released source, not recommended.</span></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">deb http://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">deb-src http://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse</span><br> <br>deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy main restricted universe multiverse<br>deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy-updates main restricted universe multiverse<br>deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy-backports main restricted universe multiverse<br>deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy-security main restricted universe multiverse<br><span class="hljs-meta prompt_"> </span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy main restricted universe multiverse</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy-updates main restricted universe multiverse</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy-backports main restricted universe multiverse</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy-security main restricted universe multiverse</span><br><span class="hljs-meta prompt_"> </span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment"># Pre-released source, not recommended.</span></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy-proposed main restricted universe multiverse</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy-proposed main restricted universe multiverse</span><br><span class="hljs-meta prompt_"> </span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment"># Pre-released source, not recommended.</span></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">deb https://mirrors.ustc.edu.cn/ubuntu/ jammy-proposed main restricted universe multiverse</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">deb-src https://mirrors.ustc.edu.cn/ubuntu/ jammy-proposed main restricted universe multiverse</span><br> <br>deb http://mirrors.163.com/ubuntu/ jammy main restricted universe multiverse<br>deb http://mirrors.163.com/ubuntu/ jammy-security main restricted universe multiverse<br>deb http://mirrors.163.com/ubuntu/ jammy-updates main restricted universe multiverse<br>deb http://mirrors.163.com/ubuntu/ jammy-backports main restricted universe multiverse<br><span class="hljs-meta prompt_"> </span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">deb-src http://mirrors.163.com/ubuntu/ jammy main restricted universe multiverse</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">deb-src http://mirrors.163.com/ubuntu/ jammy-security main restricted universe multiverse</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">deb-src http://mirrors.163.com/ubuntu/ jammy-updates main restricted universe multiverse</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">deb-src http://mirrors.163.com/ubuntu/ jammy-backports main restricted universe multiverse</span><br><span class="hljs-meta prompt_"> </span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment"># Pre-released source, not recommended.</span></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">deb http://mirrors.163.com/ubuntu/ jammy-proposed main restricted universe multiverse</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">deb-src http://mirrors.163.com/ubuntu/ jammy-proposed main restricted universe multiverse</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 开始更新软件镜像源和软件包</span><br>sudo apt update      <span class="hljs-comment">#更新软件源</span><br>sudo apt upgrade     <span class="hljs-comment">#更新软件包</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="4、docker-安装"><a href="#4、docker-安装" class="headerlink" title="4、docker 安装"></a>4、docker 安装</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs shell">1. 先卸载旧版本的docke<br>sudo apt-get remove docker docker-engine docker.io<br>2. 更新一下apt-get源<br>sudo apt-get update<br>3. 安装GPG证书<br><span class="hljs-meta prompt_">#</span><span class="language-bash">别忘了最后的“-”</span><br>curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -<br>4. 写入软件源信息<br>sudo add-apt-repository &quot;deb [arch=amd64] http://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable&quot;<br>5. 列出可用版本<br>sudo apt-cache madison docker-ce<br>6. 更新并安装 Docker-CE<br>sudo apt-get update<br>sudo apt-get install docker-ce=5:23.0.5-1~ubuntu.20.04~focal<br>sudo apt-get install docker-ce=5:24.0.4-1~ubuntu.22.04~jammy<br>7. 开启docker服务，查看docker状态<br>sudo service docker start<br>sudo service docker status<br>systemctl restart docker<br>8.使用docker的命令，查看现有镜像和正在运行的容器<br>docker images<br>docker ps<br><span class="hljs-meta prompt_"># </span><span class="language-bash">docker compose安装</span><br>curl -L &quot;https://github.com/docker/compose/releases/download/1.29.0/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo apt-get update<br>sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common<br>curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -<br>sudo add-apt-repository &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable&quot;<br><br>sudo apt-get update<br>sudo apt-get install docker-ce docker-ce-cli containerd.io<br></code></pre></td></tr></table></figure>
+
+<h3 id="docker-换源"><a href="#docker-换源" class="headerlink" title="docker 换源"></a>docker 换源</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs shell">[root@localhost henryhzy]# vim /etc/docker/daemon.json  # 创建或修改 /etc/docker/daemon.json 文件，修改为如下形式<br>&#123;<br>    &quot;registry-mirrors&quot; : [<br>    &quot;https://docker.mirrors.ustc.edu.cn&quot;,<br>    &quot;http://hub-mirror.c.163.com&quot;,<br>    &quot;https://cr.console.aliyun.com/&quot;<br>  ]<br>&#125;<br><span class="hljs-meta prompt_">$ </span><span class="language-bash">systemctl daemon-reload</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">systemctl restart docker</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker info</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="5、docker搭建个人博客"><a href="#5、docker搭建个人博客" class="headerlink" title="5、docker搭建个人博客"></a>5、docker搭建个人博客</h1><h3 id="安装docker-compose"><a href="#安装docker-compose" class="headerlink" title="安装docker-compose"></a>安装docker-compose</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs shell">先输入命令安装docker-compose<br>sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose<br>sudo chmod +x /usr/local/bin/docker-compose<br>sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose<br><br>测试已下版本<br>docker-compose --version<br>显示docker-compose version 1.26.0, build d4451659<br><br>再拉两个镜像<br>docker pull wordpress<br><br>docker pull mysql:5.6<br><br>建一个文件夹放wordpress bolg<br>mkdir -p /wang/wordpress<br></code></pre></td></tr></table></figure>
+
+<h3 id="vi命令-创建一个docker-compose-yml"><a href="#vi命令-创建一个docker-compose-yml" class="headerlink" title="vi命令 创建一个docker-compose.yml"></a>vi命令 创建一个docker-compose.yml</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">vim docker-compose.yml<br></code></pre></td></tr></table></figure>
+
+<h3 id="把下文内容写进docker-compose-yml里面"><a href="#把下文内容写进docker-compose-yml里面" class="headerlink" title="把下文内容写进docker-compose.yml里面"></a>把下文内容写进docker-compose.yml里面</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs shell">version: &#x27;3&#x27;<br>services:<br>  wordpress:<br>    image: wordpress<br>    restart: always<br>    ports:<br>      - 80:9090<br>    environment:<br>      WORDPRESS_DB_HOST: db<br>      WORDPRESS_DB_USER: exampleuser<br>      WORDPRESS_DB_PASSWORD: examplepass<br>      WORDPRESS_DB_NAME: exampledb<br>    networks:<br>      - wang-net<br>    volumes:<br>      - wordpress:/var/www/html<br><br>  db:<br>    image: mysql:5.6<br>    restart: always<br>    environment:<br>      MYSQL_DATABASE: exampledb<br>      MYSQL_USER: exampleuser<br>      MYSQL_PASSWORD: examplepass<br>      MYSQL_RANDOM_ROOT_PASSWORD: &#x27;1&#x27;<br>    volumes:<br>      - db:/var/lib/mysql<br>    networks:<br>      - wang-net<br><br>volumes:<br>  wordpress:<br>  db:<br>  <br>networks:<br>  wang-net:<br>    driver: bridge<br></code></pre></td></tr></table></figure>
+
+<h3 id="再执行命令启动这个compose"><a href="#再执行命令启动这个compose" class="headerlink" title="再执行命令启动这个compose"></a>再执行命令启动这个compose</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker-compose up -d<br></code></pre></td></tr></table></figure>
+
+<h1 id="6、docker配置数据库"><a href="#6、docker配置数据库" class="headerlink" title="6、docker配置数据库"></a>6、docker配置数据库</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/other/" class="category-chain-item">other</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E9%83%A8%E7%BD%B2/" class="print-no-link">#部署</a>
+      
+        <a href="/tags/wsl/" class="print-no-link">#wsl</a>
+      
+        <a href="/tags/windows/" class="print-no-link">#windows</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【other】WSL基础使用指南</div>
+      <div>http://example.com/2023/12/23/WSL基础使用指南/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Wangxiaowang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年12月23日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/12/24/httprunner%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A1%86%E6%9E%B6%2021144adb494f46bf8f80869a1d089171/" title="【python】httprunner接口自动化框架">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【python】httprunner接口自动化框架</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/12/15/djangoAdmin%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95/" title="djangoAdmin部署记录">
+                        <span class="hidden-mobile">djangoAdmin部署记录</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

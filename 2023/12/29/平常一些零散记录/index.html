@@ -1,0 +1,905 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Wangxiaowang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="临时记录用的shell命令行grepgrep ‘查找内容’ -n   -n 显示匹配内容的行号  grep ‘查找内容’ -v  -v 是反选，就是不展示grep的内容  grep ‘查找内容’ -A  10 注意大写的字母ABC  -A是指：after 查找内容后10行的内容， -B是指：before 查找内容的前多少行的内容 -C是指：context.查找内容的前后各多少行  grep ^内容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【other】临时记录用的">
+<meta property="og:url" content="http://example.com/2023/12/29/%E5%B9%B3%E5%B8%B8%E4%B8%80%E4%BA%9B%E9%9B%B6%E6%95%A3%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="Wang">
+<meta property="og:description" content="临时记录用的shell命令行grepgrep ‘查找内容’ -n   -n 显示匹配内容的行号  grep ‘查找内容’ -v  -v 是反选，就是不展示grep的内容  grep ‘查找内容’ -A  10 注意大写的字母ABC  -A是指：after 查找内容后10行的内容， -B是指：before 查找内容的前多少行的内容 -C是指：context.查找内容的前后各多少行  grep ^内容">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/bing_2022_OHR.KeralaIndia.jpg">
+<meta property="article:published_time" content="2023-12-29T02:42:01.000Z">
+<meta property="article:modified_time" content="2023-12-29T03:46:07.645Z">
+<meta property="article:author" content="Wangxiaowang">
+<meta property="article:tag" content="部署">
+<meta property="article:tag" content="other">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/bing_2022_OHR.KeralaIndia.jpg">
+  
+  
+  
+  <title>【other】临时记录用的 - Wang</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Home</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bing_2022_OHR.CelebratingSurfing.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【other】临时记录用的"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-12-29 10:42" pubdate>
+          2023年12月29日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          16k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          131 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">【other】临时记录用的</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id=""><a href="#" class="headerlink" title=""></a></h1><h1 id="临时记录用的"><a href="#临时记录用的" class="headerlink" title="临时记录用的"></a>临时记录用的</h1><h1 id="shell命令行"><a href="#shell命令行" class="headerlink" title="shell命令行"></a>shell命令行</h1><h2 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h2><p>grep ‘查找内容’ -n </p>
+<ul>
+<li>-n 显示匹配内容的行号</li>
+</ul>
+<p>grep ‘查找内容’ -v</p>
+<ul>
+<li>-v 是反选，就是不展示grep的内容</li>
+</ul>
+<p>grep ‘查找内容’ -A  10 注意大写的字母ABC</p>
+<ul>
+<li>-A是指：after 查找内容后10行的内容，</li>
+<li>-B是指：before 查找内容的前多少行的内容</li>
+<li>-C是指：context.查找内容的前后各多少行</li>
+</ul>
+<p>grep ^内容 </p>
+<ul>
+<li>^是匹配以内容开头的行，注意是行</li>
+</ul>
+<p>grep 内容$</p>
+<ul>
+<li>返回以什么内容结尾的行，</li>
+</ul>
+<h2 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h2><p>修改文件内容用，</p>
+<ul>
+<li><p>不修改文件内容用-e </p>
+<ul>
+<li>sed -e  ‘ 旧内容  新内容 ‘  xx文件</li>
+</ul>
+</li>
+<li><p>修改文件内容用 -i </p>
+<ul>
+<li>sed -i ‘旧内容  新内容 ‘ xx文件</li>
+</ul>
+</li>
+<li><p>sed -e 后面的接的指令</p>
+<ul>
+<li>a 新增</li>
+<li>c 取代</li>
+<li>d 删除</li>
+<li>i 插入</li>
+<li>p 打印</li>
+</ul>
+</li>
+</ul>
+<h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><p>address: cosmos1g920yuxdmqtfxg4w8a0j9sgaazfryr2cx0d755</p>
+<p>取出address的值</p>
+<p>就用awk ‘&#x2F;address&#x2F;{print $2}’  得到cosmos1g920yuxdmqtfxg4w8a0j9sgaazfryr2cx0d755</p>
+<p>原理是：其中 <code>/address/</code> 表示匹配包含 <code>address</code> 的行，<code>&#123;print $2&#125;</code> 表示输出该行的第二个字段。输出结果为 <code>cosmos1g920yuxdmqtfxg4w8a0j9sgaazfryr2cx0d755</code></p>
+<p>$2 里面的2可以换成1、3、4等任何数字，数字表示你匹配到的字段的后几位开始的数据，例如你匹配到的cosmosxxxxxx是在address的后面的3个字符后才出现的，那就是$3 第四个字符出现的就是$4，以此类推</p>
+<p><img src="/img/awk2.png" srcset="/img/loading.gif" lazyload alt="image-20230615110717966"></p>
+<p>awk ‘：’‘ {pring $2}’</p>
+<p>输出该行第二个字段</p>
+<p>比如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker ps <br>CONTAINER ID   IMAGE                             COMMAND                   CREATED       STATUS                  PORTS                                                           NAMES<br>a7a584dfd04a   django-vue-admin_dvadmin-django   &quot;/backend/docker_sta…&quot;   13 days ago   Up Less than a second   0.0.0.0:8000-&gt;8000/tcp, :::8000-&gt;8000/tcp                       dvadmin-django<br>286cc8be5d9f   mysql:5.7                         &quot;docker-entrypoint.s…&quot;   13 days ago   Up Less than a second   0.0.0.0:3306-&gt;3306/tcp, :::3306-&gt;3306/tcp, 33060/tcp            dvadmin-mysql<br>1cb7df749dec   mysql:8.0.30                      &quot;docker-entrypoint.s…&quot;   2 weeks ago   Up Less than a second   33060/tcp, 0.0.0.0:3307-&gt;3306/tcp, :::3307-&gt;3306/tcp            django_mysql<br>93b06a5f97a1   portainer/portainer-ce:latest     &quot;/portainer&quot;              2 weeks ago   Up Less than a second   8000/tcp, 9443/tcp, 0.0.0.0:1009-&gt;9000/tcp, :::1009-&gt;9000/tcp   portainer<br><br>docker ps | awk &#x27;&#123;print $1&#125;&#x27; # 使用 awk 工具对前一个命令的输出进行处理，提取每行的第一个字段（以空格为分隔符），并将其打印出来<br>CONTAINER<br>a7a584dfd04a<br>286cc8be5d9f<br>1cb7df749dec<br>93b06a5f97a1<br>docker ps | awk &#x27;&#123;print $1&#125;&#x27;|tail +2  # 从第二个开始取<br>a7a584dfd04a<br>286cc8be5d9f<br>1cb7df749dec<br>93b06a5f97a1<br>docker stop $(docker ps | awk &#x27;&#123;print $1&#125;&#x27;|tail +2) # 停止容器<br></code></pre></td></tr></table></figure>
+
+<p>比如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">address: cosmos1g920yuxdmqtfxg4w8a0j9sgaazfryr2cx0d755<br>取出address的值<br><span class="hljs-meta prompt_"># </span><span class="language-bash">就用</span><br>awk ‘/address/&#123;print $2&#125;’  得到cosmos1g920yuxdmqtfxg4w8a0j9sgaazfryr2cx0d755<br><br>原理是：其中 `/address/` 表示匹配包含 `address` 的行，`&#123;print $2&#125;` 表示输出该行的第二个字段。输出结果为 `cosmos1g920yuxdmqtfxg4w8a0j9sgaazfryr2cx0d755`<br></code></pre></td></tr></table></figure>
+
+<p>三剑客的功能非常强大，但我们只需要掌握他们分别擅长的领域即可：<strong>grep</strong>擅长查找功能，<strong>sed</strong>擅长取行和替换。<strong>awk</strong>擅长取列。</p>
+<p>vscode远程连接到远程服务器后，无修改文件权限</p>
+<p>Failed to save “test’’: Unable to write file (NoPermissions (FileSystemError): Error: EACCES: permission denied, open…<br>修改权限：<br>sudo chown -R myuser &#x2F;path&#x2F;to&#x2F;folder<br>other：<br>所有conda命令必须在没有超级用户特权的情况下运行。</p>
+<h1 id="pytest"><a href="#pytest" class="headerlink" title="pytest"></a>pytest</h1><p>命令行执行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">pytest -s ./wangtestcase/testwang.py  --log-level=debug  --alluredir=./wangtestcase/report  --clean-alluredir<br><br>pytest -s ./checklist/test_delegate.py::TestRegionDelegate::test_region_delegate <br><br></code></pre></td></tr></table></figure>
+
+
+
+<p>将allure报告改成html文件</p>
+<blockquote>
+<p> allure generate .&#x2F;wangtestcase&#x2F;report&#x2F;json -o .&#x2F;wangtest&#x2F;report&#x2F;html</p>
+</blockquote>
+<p>查看allure报告</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shelll">allure serve ./wangtestcase/report/json<br></code></pre></td></tr></table></figure>
+
+<p>加参数 -s 不打印细节</p>
+<blockquote>
+<p>pytest testcase.py -s</p>
+</blockquote>
+<p>加参数 - m 组名</p>
+<blockquote>
+<p>在对应的测试函数上面加装饰器如：</p>
+<p>@pytest.mark.maoyan</p>
+<p>def test001(self):</p>
+<p>​	assert 1 +1 &#x3D;&#x3D;2</p>
+<p>命令行运行的时候 pytest testcase.py -s -m&#x3D;maoyan</p>
+<p>这个是个就只会执行带maoyan装饰器的用例</p>
+</blockquote>
+<p>加参数 -maxfail&#x3D;1 出现1个失败用例时就终止测试</p>
+<blockquote>
+<p>maxfail&#x3D;1：出现1个失败就终止测试<br>如：pytest testcase.py –maxfail&#x3D;1</p>
+</blockquote>
+<p>加参数 –html&#x3D;.&#x2F;test&#x2F;test.html 生成html报告且指定保存路径（需要先安装pytest-html）</p>
+<blockquote>
+<p>–html&#x3D;路径&#x2F;report.html：生成xml&#x2F;html格式测试报告<br>如：pytest testcase.py –html&#x3D;.&#x2F;report.html</p>
+</blockquote>
+<p>加参数 –reruns&#x3D;2 一旦用例运行失败，重新再跑一次（需要先安装pytest-rerunfailures）</p>
+<blockquote>
+<p>如：pytest testcase.py –reruns&#x3D;2</p>
+</blockquote>
+<p>pytest的ini配置文件</p>
+<p>位置：可以用全局搜索pytest.ini把这个文件搜出来</p>
+<p>作用：指定Pytest的运行方式 （在cmd输入pytest 后，会读取Pytest.ini中的配置信息，按指定的方式去运行）</p>
+<p>也可以使用pytest -h 查看pytest.ini的设置选项，</p>
+<p>常用设置选项如下</p>
+<blockquote>
+<p>[pytest]<br>addopts &#x3D; -s … #可添加多个命令行参数，用空格分隔<br>testpaths &#x3D; …&#x2F;pytestproject #测试用例文件夹，可自己配置，…&#x2F;pytestproject为上一层的pytestproject文件夹。<br>python_files &#x3D; test*.py #配置测试搜索的模块文件名称<br>python_classes &#x3D; Test* #配置测试搜索的测试类名<br>python_funtions &#x3D; test #配置测试搜索的测试函数名</p>
+<p>reruns &#x3D; 3 # 默认重复3次</p>
+<p>reruns_delay &#x3D; 5 </p>
+<p>示例如下：<br>[pytest]<br>addopts &#x3D; -s –html&#x3D;.&#x2F;report.html<br>testpaths &#x3D; …&#x2F;pytestproject<br>python_files &#x3D; test*.py<br>python_classes &#x3D; Test*<br>python_funtions &#x3D; test*</p>
+<p>filterwarnings &#x3D;<br>    ignore  # 忽略警告</p>
+</blockquote>
+<p>pytest前置和后置方法</p>
+<blockquote>
+<p>setup、teardown、setup_class、teardown_class 注意，是小写字母</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">setup_class</span>(<span class="hljs-params">self</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;类级别的前置&quot;</span>)<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">teardown_class</span>(<span class="hljs-params">self</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;类级别的后置&quot;</span>)<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">setup</span>(<span class="hljs-params">self</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;每次用例前置执行&quot;</span>)<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">teardown</span>(<span class="hljs-params">self</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;每次用例后置执行&quot;</span>)<br></code></pre></td></tr></table></figure>
+</blockquote>
+<p>fixtrue修饰器</p>
+<p>作用：标记的方法通常用于在其他函数、模块、类或者整个工程调用时会优先执行，通常会被用于完成预置处理和重复操作。例如：登录，执行SQL等操作。</p>
+<p>fixure前置运行</p>
+<p>运行范围：fixture(scope &#x3D; ‘function’,autose&#x3D;Ture) </p>
+<blockquote>
+<p>@pytest.fixture(scope &#x3D; ‘function’,autose&#x3D;Ture)</p>
+<p>def login( ) :</p>
+<p>​	print(“登录系统”)</p>
+<p>scope &#x3D; ‘function’该文件下的所有的测试方法，在执行前都会运行一次这个前置方法，不管哪个类里面还是外面</p>
+<p>如果装饰器是</p>
+<p>@pytest.fixture(scope&#x3D;’class’,autouse&#x3D;True)</p>
+<p>那就是每个测试类在执行前会执行一次该方法</p>
+<p>或者还有一种方式是，在对应的类的前面加装饰器@pytest.mark.usefixtures(‘login’) 括号里面放对应函数，</p>
+<p>也可以在N个用例中执行某一个函数，只要在对应测试函数的传参里面加一个对应的方法名称就可以，如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pytest<br> <br><span class="hljs-meta">@pytest.fixture()</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">login</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;登录系统&#x27;</span>)<br> <br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test_01</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;测试用例一&#x27;</span>)<br> <br><span class="hljs-keyword">class</span> <span class="hljs-title class_">TestCase1</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test_03</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;测试用例三&#x27;</span>)<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">test04</span>(<span class="hljs-params">self,login</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;测试用例四&#x27;</span>)<br> <br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    pytest.main([<span class="hljs-string">&#x27;-s&#x27;</span>,<span class="hljs-string">&#x27;pytest-demo.py&#x27;</span>])<br>    这样就指挥在test04这个测试方法上 运行这个login函数方法了，<br></code></pre></td></tr></table></figure>
+
+
+</blockquote>
+<p>fixture之params参数化： 传入的参数可以是list、tuple、字典列表、字典元组</p>
+<blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pytest<br> <br><span class="hljs-keyword">def</span> <span class="hljs-title function_">read_yaml</span>():<br>    <span class="hljs-keyword">return</span> [<span class="hljs-string">&#x27;1&#x27;</span>,<span class="hljs-string">&#x27;2&#x27;</span>,<span class="hljs-string">&#x27;3&#x27;</span>]<br> <br><span class="hljs-meta">@pytest.fixture(<span class="hljs-params">params=read_yaml(<span class="hljs-params"></span>)</span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_param</span>(<span class="hljs-params">request</span>):<br>    <span class="hljs-keyword">return</span> request.param<br> <br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test01</span>(<span class="hljs-params">get_param</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;测试用例：&#x27;</span>+get_param)<br> <br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    pytest.main([<span class="hljs-string">&#x27;-s&#x27;</span>,<span class="hljs-string">&#x27;pytest-demo.py&#x27;</span>])<br>    <br></code></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<p>“1.此例中test01方法被执行了三次，分别使用的数据为’1’,’2’,’3’，此结果类似于ddt数据驱动的功能。特别注意：这里的request参数名是固定的，然后request.param的param没有s哦。”</p>
+<p>2.可以把return request.param改成yield request.param，yield也是返回的意思，它和return的区别在于return返回后后面不能接代码，但是yield返回后，后面还可以接代码。</p>
+</blockquote>
+<p>Fixture其他参数：</p>
+<blockquote>
+<p>1.autouse参数：自动执行，上面的示例已经用到了。</p>
+<p>2.ids参数：ids参数是给每一项params参数设置自定义名称用的，意义不大。</p>
+<p>3.name参数：相对于把被fixture标记的方法重命名，意义不大。如下图所示案例：</p>
+</blockquote>
+<p>使用@pytest.mark.parametrize( )方法实现参数化 <strong>#常用</strong></p>
+<p>方法详情：pytest.mark.parametrize(argnames,argvalues,indirect&#x3D;False,ids&#x3D;None,scope&#x3D;None )</p>
+<p>常用传参：</p>
+<p>argnames：参数名，</p>
+<p>argvalues:参数值 ,可以为list和tuple，或者字典列表，字典元祖等）,参数值有N个，用例就会执行N次。</p>
+<p>使用方式一：**#常用**</p>
+<blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pytest<br> <br>lis = [&#123;<span class="hljs-string">&#x27;name&#x27;</span>:<span class="hljs-string">&#x27;zhangsan&#x27;</span>&#125;,&#123;<span class="hljs-string">&#x27;age&#x27;</span>:<span class="hljs-string">&#x27;18&#x27;</span>&#125;,&#123;<span class="hljs-string">&#x27;sex&#x27;</span>,<span class="hljs-string">&#x27;男&#x27;</span>&#125;]<br><span class="hljs-meta">@pytest.mark.parametrize(<span class="hljs-params"><span class="hljs-string">&#x27;caseinfo&#x27;</span>,lis</span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test01</span>(<span class="hljs-params">caseinfo</span>):<br>    <span class="hljs-built_in">print</span>(caseinfo)<br> <br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    pytest.main([<span class="hljs-string">&#x27;-s&#x27;</span>,<span class="hljs-string">&#x27;pytest-demo.py&#x27;</span>])<br></code></pre></td></tr></table></figure>
+
+<p>这里的’caseinfo’就是argnames,也可以写成argnames&#x3D; ‘caseinfo’ </p>
+<p>同理，lis就是取值，也可以写成argvalues&#x3D;lis</p>
+</blockquote>
+<p>使用方式二 ：类似于@unpack解包功能解开对应的数据组</p>
+<blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pytest<br> <br>lis = [(<span class="hljs-string">&#x27;admin&#x27;</span>,<span class="hljs-string">&#x27;123&#x27;</span>),(<span class="hljs-string">&#x27;admin1&#x27;</span>,<span class="hljs-string">&#x27;123456&#x27;</span>)]<br><span class="hljs-meta">@pytest.mark.parametrize(<span class="hljs-params"><span class="hljs-string">&#x27;username,password&#x27;</span>,lis</span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">test01</span>(<span class="hljs-params">username,password</span>):<br>    <span class="hljs-built_in">print</span>(username,password)<br> <br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    pytest.main([<span class="hljs-string">&#x27;-s&#x27;</span>,<span class="hljs-string">&#x27;pytest-demo.py&#x27;</span>])<br></code></pre></td></tr></table></figure>
+
+</blockquote>
+<p>pytest 错误校验</p>
+<p>如果正常的引发异常则通过，没有抛出异常或抛出的异常类型不正确，则测试失败<br>另一种方式判断异常信息</p>
+<p>with 是上下文管理器</p>
+<p>with pytest.raises 是管理pytest抛出的异常 as 是把抛出的异常窗口命名</p>
+<p>pytest.raises(ValueError)  括号里面的就是程序运行时的异常原因，如果等于这个异常原因，程序不会终止，会通过 ，所以在使用之前，就要知道程序运行会报什么错</p>
+<p>然后exception_msg是接收异常窗口的值，这个可以拿去用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">with</span> pytest.raises(ValueError) <span class="hljs-keyword">as</span> excinfo: <span class="hljs-comment"># 管理窗口抛出的异常 with上下文管理器</span><br>    exception_msg = excinfo.value.args[<span class="hljs-number">0</span>] <span class="hljs-comment"># 接收窗口抛出的异常</span><br><span class="hljs-keyword">assert</span> exception_msg == <span class="hljs-string">&quot;自定义的错误信息&quot;</span> <span class="hljs-comment"># 断言</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+</blockquote>
+<h1 id="推导式"><a href="#推导式" class="headerlink" title="推导式"></a>推导式</h1><p>推导式：如果想通过操作和处理一个序列（或者其他的可迭代对象）来创建一个新的列表时</p>
+<ul>
+<li>列表</li>
+<li>字典</li>
+<li>集合</li>
+</ul>
+<p>列表推导式</p>
+<blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 查询验证者节点</span><br>nade_dict = self.tx.Query.query_staking_validator()  <span class="hljs-comment"># 用一个变量去接收查询出来的结果字典</span><br><span class="hljs-comment"># nade_name_list = []  # 新建空列表等下用来接收查询出来的全部node_name</span><br><span class="hljs-comment"># for i in nade_dict.get(&#x27;validators&#x27;):</span><br> <span class="hljs-comment"># nade_name_list.append(i.get(&#x27;description&#x27;).get(&#x27;moniker&#x27;)) # # 追加进这个空列表里面</span><br><br>node_name_list = [i.get(<span class="hljs-string">&#x27;description&#x27;</span>).get(<span class="hljs-string">&#x27;moniker&#x27;</span>) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> (nade_dict.get(<span class="hljs-string">&#x27;validators&#x27;</span>))]  <span class="hljs-comment"># 用推导式的写法</span><br></code></pre></td></tr></table></figure>
+</blockquote>
+<p>将字典内的键值对打印出来</p>
+<blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">my_dict = &#123;<span class="hljs-string">&#x27;k1&#x27;</span>: <span class="hljs-string">&#x27;v1&#x27;</span>, <span class="hljs-string">&#x27;k2&#x27;</span>: <span class="hljs-string">&#x27;v2&#x27;</span>, <span class="hljs-string">&#x27;k3&#x27;</span>: <span class="hljs-string">&#x27;v3&#x27;</span>&#125;<br><br><span class="hljs-comment"># 使用循环遍历字典，并打印每个键值对</span><br><span class="hljs-keyword">for</span> key, value <span class="hljs-keyword">in</span> my_dict.items():<br> <span class="hljs-built_in">print</span>(key, value)<br></code></pre></td></tr></table></figure>
+
+
+</blockquote>
+<p>字典组装：</p>
+<p>zip（）函数 要学会用zip组装</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python">listA = [<span class="hljs-string">&quot;A&quot;</span>,<span class="hljs-string">&quot;B&quot;</span>,<span class="hljs-string">&quot;C&quot;</span>,<span class="hljs-string">&quot;D&quot;</span>]<br>listB = [<span class="hljs-string">&quot;a&quot;</span>,<span class="hljs-string">&quot;b&quot;</span>,<span class="hljs-string">&quot;c&quot;</span>,<span class="hljs-string">&quot;d&quot;</span>]<br>把这两个列表转化成字典<br>dictionary = <span class="hljs-built_in">dict</span>(<span class="hljs-built_in">zip</span>(listA, listB))<br><br><span class="hljs-built_in">print</span>(dictionary)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs python">regin_node_name = &#123;<span class="hljs-string">&#x27;mevaloper1z820hara5yqa82zs8kuxjgysze3gkk6mkqe7gd&#x27;</span>: <span class="hljs-string">&#x27;node1&#x27;</span>,<br>                   <span class="hljs-string">&#x27;mevaloper1rsyss639d4aqjuuf9unjear0j6p06rjz4kgler&#x27;</span>: <span class="hljs-string">&#x27;node5&#x27;</span>,<br>                   <span class="hljs-string">&#x27;mevaloper1fd8fn2d56m3d6dwf5s7j7zgtert0rssng5u3e4&#x27;</span>: <span class="hljs-string">&#x27;node8&#x27;</span>,<br>                   <span class="hljs-string">&#x27;mevaloper1tn7vup0a6ma6x7tggkkalw6pc6x3ets9eg4ejv&#x27;</span>: <span class="hljs-string">&#x27;node4&#x27;</span>,<br>                   <span class="hljs-string">&#x27;mevaloper10g230d2vux9je4080eggk80spn44wkg9m73nlv&#x27;</span>: <span class="hljs-string">&#x27;node6&#x27;</span>,<br>                   <span class="hljs-string">&#x27;mevaloper10ugvk0vp8evnrtn9suaugvte8z4lcvgmgvlf62&#x27;</span>: <span class="hljs-string">&#x27;node3&#x27;</span>,<br>                   <span class="hljs-string">&#x27;mevaloper1seq5nwcscr9ugwpfyvfgc35ryk9wjpey04nkrk&#x27;</span>: <span class="hljs-string">&#x27;node7&#x27;</span>,<br>                   <span class="hljs-string">&#x27;mevaloper1kwtll6uzugd48aku78607rul5jkvvtsjaqjmcl&#x27;</span>: <span class="hljs-string">&#x27;node9&#x27;</span>,<br>                   <span class="hljs-string">&#x27;mevaloper1kl7ya94cqyzt0ppj5qtk6gxl8rqv3qctgftyfc&#x27;</span>: <span class="hljs-string">&#x27;node2&#x27;</span>&#125;<br><br>regin_list_name = &#123;<span class="hljs-string">&#x27;mevaloper1z820hara5yqa82zs8kuxjgysze3gkk6mkqe7gd&#x27;</span>: <span class="hljs-string">&#x27;CHN&#x27;</span>,<br>                   <span class="hljs-string">&#x27;mevaloper10g230d2vux9je4080eggk80spn44wkg9m73nlv&#x27;</span>: <span class="hljs-string">&#x27;FLK&#x27;</span>,<br>                   <span class="hljs-string">&#x27;mevaloper1kwtll6uzugd48aku78607rul5jkvvtsjaqjmcl&#x27;</span>: <span class="hljs-string">&#x27;HKG&#x27;</span>,<br>                   <span class="hljs-string">&#x27;mevaloper1tn7vup0a6ma6x7tggkkalw6pc6x3ets9eg4ejv&#x27;</span>: <span class="hljs-string">&#x27;ISL&#x27;</span>,<br>                   <span class="hljs-string">&#x27;mevaloper1seq5nwcscr9ugwpfyvfgc35ryk9wjpey04nkrk&#x27;</span>: <span class="hljs-string">&#x27;LBY&#x27;</span>,<br>                   <span class="hljs-string">&#x27;mevaloper1rsyss639d4aqjuuf9unjear0j6p06rjz4kgler&#x27;</span>: <span class="hljs-string">&#x27;NFK&#x27;</span>,<br>                   <span class="hljs-string">&#x27;mevaloper10ugvk0vp8evnrtn9suaugvte8z4lcvgmgvlf62&#x27;</span>: <span class="hljs-string">&#x27;NZL&#x27;</span>,<br>                   <span class="hljs-string">&#x27;mevaloper1fd8fn2d56m3d6dwf5s7j7zgtert0rssng5u3e4&#x27;</span>: <span class="hljs-string">&#x27;TWN&#x27;</span>,<br>                   <span class="hljs-string">&#x27;mevaloper1kl7ya94cqyzt0ppj5qtk6gxl8rqv3qctgftyfc&#x27;</span>: <span class="hljs-string">&#x27;USA&#x27;</span>&#125;<br><br><span class="hljs-comment"># new = &#123;&quot;node1&quot;: &quot;CHN&quot;, &quot;node2&quot;: &quot;USA&quot;, &quot;node3&quot;: &quot;NZL&quot;, &quot;node4&quot;: &quot;ISL&quot;, &quot;node5&quot;: &quot;NFK&quot;, &quot;node6&quot;: &quot;FLK&quot;, &quot;node7&quot;: &quot;LBY&quot;,</span><br><span class="hljs-comment">#        &quot;node8&quot;: &quot;TWN&quot;, &quot;node9&quot;: &quot;HKG&quot;&#125;</span><br><br>new = <span class="hljs-built_in">dict</span>(<span class="hljs-built_in">zip</span>(regin_node_name.values(), regin_list_name.values()))<br><span class="hljs-built_in">print</span>(new)<br><br>&gt;&gt;&gt;&#123;<span class="hljs-string">&quot;node1&quot;</span>: <span class="hljs-string">&quot;CHN&quot;</span>, <span class="hljs-string">&quot;node2&quot;</span>: <span class="hljs-string">&quot;USA&quot;</span>, <span class="hljs-string">&quot;node3&quot;</span>: <span class="hljs-string">&quot;NZL&quot;</span>, <span class="hljs-string">&quot;node4&quot;</span>: <span class="hljs-string">&quot;ISL&quot;</span>, <span class="hljs-string">&quot;node5&quot;</span>: <span class="hljs-string">&quot;NFK&quot;</span>, <span class="hljs-string">&quot;node6&quot;</span>: <span class="hljs-string">&quot;FLK&quot;</span>, <span class="hljs-string">&quot;node7&quot;</span>: <span class="hljs-string">&quot;LBY&quot;</span>,<br>       <span class="hljs-string">&quot;node8&quot;</span>: <span class="hljs-string">&quot;TWN&quot;</span>, <span class="hljs-string">&quot;node9&quot;</span>: <span class="hljs-string">&quot;HKG&quot;</span>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="把两个键名相同的字典的值，组合起来组成一个新的字典。"><a href="#把两个键名相同的字典的值，组合起来组成一个新的字典。" class="headerlink" title="把两个键名相同的字典的值，组合起来组成一个新的字典。"></a>把两个键名相同的字典的值，组合起来组成一个新的字典。</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python">node_dict = &#123;<span class="hljs-string">&quot;a&quot;</span>: <span class="hljs-string">&quot;node1&quot;</span>, <span class="hljs-string">&quot;b&quot;</span>: <span class="hljs-string">&quot;node3&quot;</span>, <span class="hljs-string">&quot;c&quot;</span>: <span class="hljs-string">&quot;node5&quot;</span>, <span class="hljs-string">&quot;e&quot;</span>: <span class="hljs-string">&quot;node2&quot;</span>, <span class="hljs-string">&quot;d&quot;</span>: <span class="hljs-string">&quot;node4&quot;</span>&#125;<br>region_dict = &#123;<span class="hljs-string">&quot;a&quot;</span>: <span class="hljs-string">&quot;CHN&quot;</span>, <span class="hljs-string">&quot;c&quot;</span>: <span class="hljs-string">&quot;JPN&quot;</span>, <span class="hljs-string">&quot;e&quot;</span>: <span class="hljs-string">&quot;USA&quot;</span>, <span class="hljs-string">&quot;d&quot;</span>: <span class="hljs-string">&quot;KOR&quot;</span>, <span class="hljs-string">&quot;b&quot;</span>: <span class="hljs-string">&quot;RUS&quot;</span>&#125;<br><br><span class="hljs-comment"># 创建一个空字典来存储新的键值对</span><br>new_dict = &#123;&#125;<br><br><span class="hljs-comment"># 遍历node_dict中的键值对</span><br><span class="hljs-keyword">for</span> key, value <span class="hljs-keyword">in</span> node_dict.items():<br>    <span class="hljs-comment"># 如果键名在region_dict中也存在，则将两个值组成一个新的键值对</span><br>    <span class="hljs-keyword">if</span> key <span class="hljs-keyword">in</span> region_dict:<br>        new_dict[value] = region_dict[key]<br><br><span class="hljs-comment"># 输出新的字典</span><br><span class="hljs-built_in">print</span>(new_dict)<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="根据键名排序，用lamdba匿名函数"><a href="#根据键名排序，用lamdba匿名函数" class="headerlink" title="根据键名排序，用lamdba匿名函数"></a>根据键名排序，用lamdba匿名函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python">my_dict_e = &#123;<span class="hljs-string">&#x27;node3&#x27;</span>: <span class="hljs-string">&#x27;ARG&#x27;</span>, <span class="hljs-string">&#x27;node9&#x27;</span>: <span class="hljs-string">&#x27;ATA&#x27;</span>, <span class="hljs-string">&#x27;node6&#x27;</span>: <span class="hljs-string">&#x27;CAN&#x27;</span>, <span class="hljs-string">&#x27;node2&#x27;</span>: <span class="hljs-string">&#x27;CHN&#x27;</span>, <span class="hljs-string">&#x27;node4&#x27;</span>: <span class="hljs-string">&#x27;HKG&#x27;</span>, <span class="hljs-string">&#x27;node12&#x27;</span>: <span class="hljs-string">&#x27;ISL&#x27;</span>, <span class="hljs-string">&#x27;node13&#x27;</span>: <span class="hljs-string">&#x27;JPN&#x27;</span>, <span class="hljs-string">&#x27;node7&#x27;</span>: <span class="hljs-string">&#x27;NZL&#x27;</span>, <span class="hljs-string">&#x27;node5&#x27;</span>: <span class="hljs-string">&#x27;RUS&#x27;</span>, <span class="hljs-string">&#x27;node11&#x27;</span>: <span class="hljs-string">&#x27;TWN&#x27;</span>, <span class="hljs-string">&#x27;node1&#x27;</span>: <span class="hljs-string">&#x27;USA&#x27;</span>, <span class="hljs-string">&#x27;node8&#x27;</span>: <span class="hljs-string">&#x27;WSM&#x27;</span>, <span class="hljs-string">&#x27;node10&#x27;</span>: <span class="hljs-string">&#x27;ZAF&#x27;</span>&#125;<br><span class="hljs-comment"># 通过node12345....排序，</span><br><span class="hljs-comment"># 思路，1 写匿名函数提取node后面的数字，</span><br>key = lamdba x : <span class="hljs-built_in">int</span>(x[<span class="hljs-number">4</span>:])  提取出来了key里面的<span class="hljs-string">&#x27;nodex&#x27;</span> node的第四位且转换成<span class="hljs-built_in">int</span>类型<br><span class="hljs-comment"># 第二步，排序，用sorted(),sorted要排序的的东西是my_dict的key，key通过lambda 切字符的第四位的数字</span><br>sorted_dict = <span class="hljs-built_in">sorted</span>(my_dict.keys(), key=<span class="hljs-keyword">lambda</span> x: <span class="hljs-built_in">int</span>(x[<span class="hljs-number">4</span>:]))<br><span class="hljs-comment"># 第三步：写for循环，且转换成推导式</span><br><span class="hljs-keyword">for</span> k,v <span class="hljs-keyword">in</span> sorted_dict:<br>    <span class="hljs-built_in">print</span>(k,v)<br><span class="hljs-comment"># 第四步，把for 循环，通过推导式写出来，</span><br>my_dict_sorted = &#123;k:my_dict[k] <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> sorted_dict&#125;<br><br><br><span class="hljs-comment"># 最后，一行代码把所有的写出来</span><br>my_dict_sorted = &#123;k:my_dict[k] <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">sorted</span>(my_dict.keys(),key=<span class="hljs-keyword">lambda</span> x: <span class="hljs-built_in">int</span>(x[<span class="hljs-number">4</span>:]))&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="储存过程："><a href="#储存过程：" class="headerlink" title="储存过程："></a>储存过程：</h3><p>作用：批处理多条sql</p>
+<p>​	可以回滚，数据库函数，后端可以直接调用</p>
+<p>一般不用，有些代码逻辑会依赖sql，</p>
+<p>本身事务就支持多条语句，</p>
+<p>代码可以直接用，</p>
+<p>触发器：也不用</p>
+<p>docker换源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs shell">cat /etc/docker/daemon.json  #先看看有没有这个文件，如果没有，说明源在国外，<br>vim /etc/docker/daemon.json  # 没有就新建，复制一下镜像源到文件里就可以了<br><br>&#123;<br>    &quot;registry-mirrors&quot; : [<br>    &quot;https://registry.docker-cn.com&quot;,<br>    &quot;https://docker.mirrors.ustc.edu.cn&quot;,<br>    &quot;http://hub-mirror.c.163.com&quot;,<br>    &quot;https://cr.console.aliyun.com/&quot;<br>  ]<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>docker 启动命令，</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker start $(docker ps -a | awk &#x27;&#123; print $1 &#125;&#x27; | tail -n +2 )<br><span class="hljs-meta prompt_"># </span><span class="language-bash">docker ps -a 展示所有容器</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">awk <span class="hljs-string">&#x27;&#123;print $1&#125;&#x27;</span>  设定分割点位空格，意思就是从每行开头的切片，遇到空格就把数据切成列，<span class="hljs-variable">$1</span>是取第一行第一列</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash"><span class="hljs-built_in">tail</span> -n +2 不要第一组数据，从第二组开始</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">docker 设置网络段，注意多容器IP访问必备</span><br>dcoer network ls 查看网络段<br>docker network create mysql<br>docker net work create es<br><span class="hljs-meta prompt_"># </span><span class="language-bash">等等</span><br><br><br></code></pre></td></tr></table></figure>
+
+<h2 id="Case下的unit-做中间层"><a href="#Case下的unit-做中间层" class="headerlink" title="Case下的unit 做中间层"></a>Case下的unit 做中间层</h2><h2 id="X下的tx和query做底层"><a href="#X下的tx和query做底层" class="headerlink" title="X下的tx和query做底层"></a>X下的tx和query做底层</h2><h2 id="checklist做用例层"><a href="#checklist做用例层" class="headerlink" title="checklist做用例层"></a>checklist做用例层</h2><p>@dataclass装饰器</p>
+<p>批量定义数据类型的</p>
+<p><code>@dataclass</code>装饰器放在类定义的上方，这使得它成为一个数据类。</p>
+<p>字典取值，方括号可点get的区别，</p>
+<ul>
+<li>如果被取字典里面没有这个键，。那么方括号会抛出程序错误KeyError</li>
+<li>如果用点get，则会返回None，不会报错</li>
+</ul>
+<h2 id="pycharm调试断点，"><a href="#pycharm调试断点，" class="headerlink" title="pycharm调试断点，"></a>pycharm调试断点，</h2><p>在可能错误的那一行的前面打上断点，在这一行的下一步的地方也打上断点，如果没进入怀疑错误的下一行，就跳出来了，就说明确定是怀疑错了的这一行，</p>
+<p>再在这一行的对象上面查看对象的内容属性参数啥的</p>
+<p><img src="/img/image-20230614103341677.png" srcset="/img/loading.gif" lazyload alt="image-20230614103341677"></p>
+<p>关于pycharm的调试时，在对应的函数内的某一个步骤上设置好断点，开启debug调试，在即将走到你怀疑的步骤上时，你可以打开这个输入对应的对象，查看这个对象内部和下面的对象以及输入对应的方法后的返回值是否符合你的要求</p>
+<h1 id="classmethod和staticmethod装饰器"><a href="#classmethod和staticmethod装饰器" class="headerlink" title="classmethod和staticmethod装饰器"></a>classmethod和staticmethod装饰器</h1><p>@staticmethod的意思就是将后面的函数转化成静态函数，</p>
+<p>大多数情况下，@classmethod和@staticmethod的效果是一样的，</p>
+<p>正式作用是类工厂，如果有类继承关系，更加明显，</p>
+<h2 id="staticmethod装饰器-（直译：静态方法）"><a href="#staticmethod装饰器-（直译：静态方法）" class="headerlink" title="staticmethod装饰器 （直译：静态方法）"></a>staticmethod装饰器 （直译：静态方法）</h2><p>函数静态化，加了这个装饰器后，这个函数就不需要所在的类实例化后调用，可以直接类名点方法调用</p>
+<p>静态装饰器，如果类内的这个方法 ，没有用到类的属性和方法，。就可以用类装饰器，</p>
+<p>这个方法没有用到类的属性和方法，是独立于这个类之外的方法，</p>
+<p>可以不用通过实例化去调用这个方法，可以直接调用这个方法。</p>
+<p>可以把一堆用不到类属性和类方法的方法放在一个类中，然后用staticmethod装饰起来。；</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Dates</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, date</span>):<br>        self.date = date<br>        <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">getDate</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">return</span> self.date<br> <br><span class="hljs-meta">    @staticmethod</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">toDashDate</span>(<span class="hljs-params">date</span>):<br>        <span class="hljs-keyword">return</span> date.replace(<span class="hljs-string">&quot;/&quot;</span>, <span class="hljs-string">&quot;-&quot;</span>)<br> <br>date = Dates(<span class="hljs-string">&quot;15-12-2016&quot;</span>)<br>dateFromDB = <span class="hljs-string">&quot;15/12/2016&quot;</span><br>dateWithDash = Dates.toDashDate(dateFromDB)<br> <br><span class="hljs-keyword">if</span>(date.getDate() == dateWithDash):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Equal&quot;</span>)<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Unequal&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="classmethod装饰器-（直译：类方法）"><a href="#classmethod装饰器-（直译：类方法）" class="headerlink" title="classmethod装饰器 （直译：类方法）"></a>classmethod装饰器 （直译：类方法）</h1><ol>
+<li>无需实例生成</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>(<span class="hljs-title class_ inherited__">object</span>):<br>    bar = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">func1</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;foo!&quot;</span>)<br><span class="hljs-meta">    @classmethod</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">func2</span>(<span class="hljs-params">cls</span>):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;funce2&quot;</span>)<br>        <span class="hljs-built_in">print</span>(cls.bar)<br>        cls().fun1() <span class="hljs-comment"># 可直接调用foo方法</span><br>A.func2()  <span class="hljs-comment"># 不需要实例化</span><br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>@classmethod类工厂 可以直接实例类内对应的方法</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> date<br> <br><span class="hljs-comment"># random Person</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, name, age</span>):<br>        self.name = name<br>        self.age = age<br> <br><span class="hljs-meta">    @classmethod</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">fromBirthYear</span>(<span class="hljs-params">cls, name, birthYear</span>):<br>        <span class="hljs-keyword">return</span> cls(name, date.today().year - birthYear)<br> <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">display</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">print</span>(self.name + <span class="hljs-string">&quot;&#x27;s age is: &quot;</span> + <span class="hljs-built_in">str</span>(self.age))<br> <br>person = Person(<span class="hljs-string">&#x27;Adam&#x27;</span>, <span class="hljs-number">19</span>)<br>person.display()<br> <br>person1 = Person.fromBirthYear(<span class="hljs-string">&#x27;John&#x27;</span>,  <span class="hljs-number">1985</span>)<br>person1.display()<br></code></pre></td></tr></table></figure>
+
+<h2 id="classmethod和-staticmethod的区别"><a href="#classmethod和-staticmethod的区别" class="headerlink" title="@classmethod和@staticmethod的区别"></a>@classmethod和@staticmethod的区别</h2><p>假设创建Foo的子类并且在子类上调用了create_new方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Bar</span>(<span class="hljs-title class_ inherited__">Foo</span>):<br>    <span class="hljs-keyword">pass</span><br>obj = Bar.create_new()<br></code></pre></td></tr></table></figure>
+
+<p>然后这个基类将导致一个新的Bar对象被创建</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Foo</span>:<br><span class="hljs-meta">    @classmethod</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">create_new</span>:<br>        <span class="hljs-keyword">return</span> cls()<br></code></pre></td></tr></table></figure>
+
+<p>而这个基类会导致创建一个新的Foo对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Foo</span>:<br><span class="hljs-meta">    @staticemethod</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">create_new</span>():<br>        <span class="hljs-keyword">return</span> Foo()<br></code></pre></td></tr></table></figure>
+
+<p>怎么用，用哪一个，取决于你想要什么行为</p>
+<h2 id="字符串转字典"><a href="#字符串转字典" class="headerlink" title="字符串转字典"></a>字符串转字典</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 终端输出output 内容为：标题：&#123;&#125;这样的模式，我们要取标题： 后面的内容。</span><br><span class="hljs-comment"># 思路：切片索引，找到索引头，找到被查找内容占索引总长度，</span><br><span class="hljs-comment"># out.find(&quot;被查内容&quot;) 这一步是找到&quot;被查内容&quot;的起始索引</span><br><span class="hljs-comment"># len(&quot;被查内容&quot;) 确定被查内容的长度，</span><br><span class="hljs-comment"># 起始索引+索引内容长度等于被查找的output 的查找起始索引，</span><br>output = <span class="hljs-string">&#x27;unsign tx is: &#123;&quot;body&quot;:&#123;&quot;messages&quot;:[&#123;&quot;@type&quot;:&quot;/cosmos.bank.v1beta1.MsgSend&quot;,&quot;from_address&quot;:&quot;me1xdflnur4d0gt25r4mazurfkath34emaxsda5vm&quot;,&quot;to_address&quot;:&quot;me1da7lnew869eh6z0mtfp363d7lccvczkduzqg9a&quot;,&quot;amount&quot;:[&#123;&quot;denom&quot;:&quot;umec&quot;,&quot;amount&quot;:&quot;100&quot;&#125;]&#125;],&quot;memo&quot;:&quot;&quot;,&quot;timeout_height&quot;:&quot;0&quot;,&quot;extension_options&quot;:[],&quot;non_critical_extension_options&quot;:[]&#125;,&quot;auth_info&quot;:&#123;&quot;signer_infos&quot;:[],&quot;fee&quot;:&#123;&quot;amount&quot;:[&#123;&quot;denom&quot;:&quot;umec&quot;,&quot;amount&quot;:&quot;100&quot;&#125;],&quot;gas_limit&quot;:&quot;200000&quot;,&quot;payer&quot;:&quot;&quot;,&quot;granter&quot;:&quot;&quot;&#125;,&quot;tip&quot;:null&#125;,&quot;signatures&quot;:[]&#125;&#x27;</span><br><br>start_index = output.find(<span class="hljs-string">&#x27;unsign tx is: &#x27;</span>) + <span class="hljs-built_in">len</span>(<span class="hljs-string">&#x27;unsign tx is: &#x27;</span>)<br><span class="hljs-comment"># out.find(&quot;被查内容&quot;) 这一步是找到&quot;被查内容&quot;的起始索引</span><br>extracted_content = output[start_index:] <span class="hljs-comment"># output[开始索引：结束索引]结束索引是空说明一直切片到最后</span><br><br><span class="hljs-built_in">print</span>(extracted_content)<br></code></pre></td></tr></table></figure>
+
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/other/" class="category-chain-item">other</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E9%83%A8%E7%BD%B2/" class="print-no-link">#部署</a>
+      
+        <a href="/tags/other/" class="print-no-link">#other</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【other】临时记录用的</div>
+      <div>http://example.com/2023/12/29/平常一些零散记录/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Wangxiaowang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年12月29日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/12/25/first/" title="这是一个标题">
+                        <span class="hidden-mobile">这是一个标题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
