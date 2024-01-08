@@ -1,0 +1,700 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Wangxiaowang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="【other】docker相关基础介绍介绍docker(后续有空补充)docker file（后续有空补充）docker compose （简单介绍）docker compose介绍docker compose 最开始是一个插件，后来官方采纳了这个开发者开发的开源插件  用于定义和运行多容器docker 应用程序的工具，它使用YAML文件来配置应用程序的服务、网络和数据卷等组件，并通过一些简单的命">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【other】docker相关基础介绍">
+<meta property="og:url" content="http://example.com/2024/01/08/docker%E7%9B%B8%E5%85%B3%E5%9F%BA%E7%A1%80%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:site_name" content="Wang">
+<meta property="og:description" content="【other】docker相关基础介绍介绍docker(后续有空补充)docker file（后续有空补充）docker compose （简单介绍）docker compose介绍docker compose 最开始是一个插件，后来官方采纳了这个开发者开发的开源插件  用于定义和运行多容器docker 应用程序的工具，它使用YAML文件来配置应用程序的服务、网络和数据卷等组件，并通过一些简单的命">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/bing_2019_OHR.MeerkatMob.jpg">
+<meta property="article:published_time" content="2024-01-08T06:48:50.000Z">
+<meta property="article:modified_time" content="2024-01-08T07:16:01.134Z">
+<meta property="article:author" content="Wangxiaowang">
+<meta property="article:tag" content="other">
+<meta property="article:tag" content="docker">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/bing_2019_OHR.MeerkatMob.jpg">
+  
+  
+  
+  <title>【other】docker相关基础介绍 - Wang</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Home</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/PoenariCastle.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【other】docker相关基础介绍"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-01-08 14:48" pubdate>
+          2024年1月8日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          23 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">【other】docker相关基础介绍</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="【other】docker相关基础介绍介绍"><a href="#【other】docker相关基础介绍介绍" class="headerlink" title="【other】docker相关基础介绍介绍"></a>【other】docker相关基础介绍介绍</h1><h2 id="docker-后续有空补充"><a href="#docker-后续有空补充" class="headerlink" title="docker(后续有空补充)"></a>docker(后续有空补充)</h2><h2 id="docker-file（后续有空补充）"><a href="#docker-file（后续有空补充）" class="headerlink" title="docker file（后续有空补充）"></a>docker file（后续有空补充）</h2><h2 id="docker-compose-（简单介绍）"><a href="#docker-compose-（简单介绍）" class="headerlink" title="docker compose （简单介绍）"></a>docker compose （简单介绍）</h2><h3 id="docker-compose介绍"><a href="#docker-compose介绍" class="headerlink" title="docker compose介绍"></a>docker compose介绍</h3><p>docker compose 最开始是一个插件，后来官方采纳了这个开发者开发的开源插件</p>
+<ol>
+<li>用于定义和运行多容器docker 应用程序的工具，它使用YAML文件来配置应用程序的服务、网络和数据卷等组件，并通过一些简单的命令提供一种统一的方式来管理和操作这些容器</li>
+<li>多容器应用：Docker Compose适用于构建和管理多容器的应用程序。你可以在同一个Compose文件中定义和管理应用程序中的多个服务，这些服务可以相互通信和协作。</li>
+<li>声明式配置：通过使用YAML文件来定义Compose配置，你可以以声明式的方式描述应用程序的结构和配置。这使得配置易于阅读、理解和维护，并且可以轻松地重现整个应用程序环境。</li>
+<li>简化的部署和管理：使用Docker Compose，你可以使用一条简单的命令来启动、停止、重启和删除整个应用程序。这使得应用程序的部署和管理变得更加简单和一致。</li>
+<li>网络和卷配置：Docker Compose允许你定义应用程序中的网络和卷配置。你可以创建自定义网络，使得Compose中的服务可以相互通信。你还可以定义卷挂载，用于持久化数据或在容器之间共享文件。</li>
+<li>扩展和覆盖：Compose配置支持扩展和覆盖，这意味着你可以在不同的环境中使用相同的Compose文件，只需根据需要覆盖某些配置。这使得在开发、测试和生产环境之间切换变得更加容易。</li>
+</ol>
+<p>服务定义：使用Docker Compose，你可以定义应用程序中的各个服务。每个服务都可以由一个或多个容器组成，可以设置容器的映像、端口映射、环境变量、卷挂载等配置</p>
+<blockquote>
+<p> 简单说就是：将你的某个应用程序所需要的服务，都编排到一个队列上去，通过docker compose来同一管理，这个时候你的这个compose内的容器都会处于同一个bridge桥网络下，</p>
+<p>提供了一种简单且一致的方式来组织和操作容器化的应用程序，并使得在不同环境钟部署和运行应用程序变得更加容易</p>
+</blockquote>
+<h3 id="docker-compose-相关命令"><a href="#docker-compose-相关命令" class="headerlink" title="docker compose 相关命令"></a>docker compose 相关命令</h3><p>构建镜像：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker-compose build<br>```<br>这个命令将根据Compose文件中定义的服务构建镜像。如果镜像已经存在，它将跳过构建步骤。<br></code></pre></td></tr></table></figure>
+
+<p>启动容器：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker-compose up<br>```<br>这个命令将使用Compose文件启动定义的服务。如果Compose文件不存在，它将自动构建镜像并启动容器。<br></code></pre></td></tr></table></figure>
+
+<p>启动容器（后台模式）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker-compose up -d<br>```<br>这个命令将以后台模式启动容器，并将输出重定向到终端。<br></code></pre></td></tr></table></figure>
+
+<p>查看Compose服务状态：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker-compose config<br>```<br>这个命令将验证Compose文件的语法并显示解析后的配置。<br></code></pre></td></tr></table></figure>
+
+<p>停止容器：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker-compose down<br>```<br>这个命令将停止并删除Compose文件定义的所有容器、网络和卷。<br></code></pre></td></tr></table></figure>
+
+<p>查看Compose文件配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker-compose config<br>```<br>这个命令将验证Compose文件的语法并显示解析后的配置。<br></code></pre></td></tr></table></figure>
+
+<p>执行Compose服务命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker-compose exec &lt;service_name&gt; &lt;command&gt;<br>```<br>这个命令将在指定的服务容器中执行给定的命令。<br></code></pre></td></tr></table></figure>
+
+<p>查看Compose服务日志：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">查看Compose的服务日志：</span><br>docker-compose logs<br>```<br>这个命令将显示Compose文件中定义的所有服务的日志输出。<br><span class="hljs-meta prompt_"># </span><span class="language-bash">查看Compose的实时日志：</span><br>docker-compose logs -f<br>```<br>这个命令将以实时方式显示Compose文件中定义的所有服务的日志输出。你可以通过按下`Ctrl + C`来停止实时日志输出。<br><span class="hljs-meta prompt_"># </span><span class="language-bash">查看特定服务的日志</span><br>docker-compose logs &lt;service_name&gt;<br>```<br>这个命令将显示指定服务的日志输出。你可以替换`&lt;service_name&gt;`为Compose文件中定义的服务名称。<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">查看指定服务的实时日志：</span><br>docker-compose logs -f &lt;service_name&gt;<br>```<br>这个命令将以实时方式显示指定服务的日志输出。你可以替换`&lt;service_name&gt;`为Compose文件中定义的服务名称。<br></code></pre></td></tr></table></figure>
+
+<h2 id="Kubernetes-K8S-简单介绍"><a href="#Kubernetes-K8S-简单介绍" class="headerlink" title="Kubernetes(K8S)简单介绍"></a>Kubernetes(K8S)简单介绍</h2><blockquote>
+<p>开发只负责开发（拔掉开发的网线），其他杂七杂八的服务有运维通过K8S统一管理</p>
+<p>比如说：开发连接数据库查询数据：只负责127.0.0.1本地连接即可，运维会在路由那里统一配置</p>
+</blockquote>
+<h3 id="Kubernetes介绍"><a href="#Kubernetes介绍" class="headerlink" title="Kubernetes介绍"></a>Kubernetes介绍</h3><p>Kubernetes（通常简称为K8s）是一个开源的容器编排平台，用于自动化部署、扩展和管理容器化应用程序。它提供了一个强大的工具集，用于管理和编排容器化应用程序的各个方面，如部署、扩缩容、负载均衡、服务发现、自愈性等。</p>
+<p>以下是网上抄的Kubernetes的一些关键概念和特点：</p>
+<ol>
+<li>容器编排：Kubernetes设计用于管理容器化应用程序。它可以自动部署和管理容器，确保它们在集群中正确运行，并根据需要进行扩展和收缩。</li>
+<li>高可用性：Kubernetes提供高可用性的架构，通过在集群中的多个节点上运行容器副本，并自动重新调度故障容器，确保应用程序的可用性。</li>
+<li>自动化扩缩容：Kubernetes允许根据应用程序的负载情况自动扩展或收缩容器的数量。这样，你可以根据需求快速适应流量变化，提高应用程序的弹性和性能。</li>
+<li>服务发现和负载均衡：Kubernetes提供内建的服务发现和负载均衡机制。它可以自动分配稳定的网络地址给容器，并将流量均匀分发到后端服务，确保应用程序的可访问性和高可用性。</li>
+<li>状态管理：Kubernetes允许你声明性地定义应用程序的状态和要求。它可以管理应用程序的部署、更新和回滚操作，确保应用程序按照预期运行。</li>
+<li>配置和存储管理：Kubernetes提供配置管理和存储管理功能。它可以管理应用程序的配置文件和敏感信息，并支持各种存储选项，如持久卷和分布式存储系统。</li>
+<li>健康检查和自愈性：Kubernetes可以对容器进行健康检查，并在容器出现故障时自动重新调度或替换它们。这提高了应用程序的可靠性和稳定性。</li>
+<li>插件生态系统：Kubernetes拥有丰富的插件生态系统，支持各种功能和扩展，如日志管理、监控、安全性、网络策略等。</li>
+</ol>
+<p>通过使用Kubernetes，你可以更方便地管理和扩展容器化应用程序，提高应用程序的可靠性和弹性。它提供了一个统一的平台，用于自动化管理容器的各个方面，并支持在多云、混合云和本地环境中的部署。</p>
+<p><img src="/../img/unsplash(1).jpg" srcset="/img/loading.gif" lazyload alt="images1"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/other/" class="category-chain-item">other</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/other/" class="print-no-link">#other</a>
+      
+        <a href="/tags/docker/" class="print-no-link">#docker</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【other】docker相关基础介绍</div>
+      <div>http://example.com/2024/01/08/docker相关基础介绍/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Wangxiaowang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年1月8日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/12/29/python%E8%A3%85%E9%A5%B0%E5%99%A8/" title="【python】python装饰器的基础实现和常见装饰器">
+                        <span class="hidden-mobile">【python】python装饰器的基础实现和常见装饰器</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
